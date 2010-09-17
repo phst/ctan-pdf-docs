@@ -1,0 +1,194 @@
+\chardef\escape=0
+\chardef\open=1
+\chardef\close=2
+\chardef\letter=11
+\chardef\other=12
+%\chardef\active=13		 % is defined in Plain already
+
+\chardef\uscode=\catcode`\_
+
+\catcode`\_=\letter
+%\font\tentex=cmtex10		% typewriter extended ASCII 10pt
+%\let\ttex=\tentex		% only with base size 10pt
+\def\ttex{\tt}			% as a substitute
+
+\def\setup_verbatim{%
+   \def\do##1{\catcode`##1\other}\dospecials
+   \parskip\z@skip \parindent\z@
+   \catcode`\`\active \@noligs
+   \obeylines \@vobeyspaces \obeytabs \frenchspacing
+   \ttex
+   }
+
+\let\tab=\space
+\begingroup
+   \catcode`\^^I=\active%	% Attention: no tabs!
+   \gdef\obeytabs{\catcode`\^^I=\active\def^^I{\tab}}
+   \global\let^^I=\tab%    % if an active tab appears in a \write
+\endgroup
+\let\origvert=|
+\chardef\vbar=`\|
+
+\def\makebaractive{\catcode`\|\active}
+\def\makebarother{\catcode`\|\other}
+\makebaractive
+
+\def|{%
+   \leavevmode
+   \hbox\bgroup
+      \let\par\space \setup_verbatim
+      \let|\egroup
+   }
+\let\@@verbatim=\@verbatim
+\def\@verbatim{%
+   \makebarother
+   \@@verbatim
+   }
+\let\@@tabarray=\@tabarray
+\def\@tabarray{%
+   \makebarother
+   \@@tabarray
+   }
+
+\def\multicolumn#1{%
+   \multispan{#1}%
+   \begingroup
+      \makebarother
+      \restof_multicolumn
+   }
+\def\restof_multicolumn#1#2{%
+      \@mkpream{#1}%
+      \def\@sharp{#2}%
+      \let\protect\relax
+      \let\@startpbox\@@startpbox  \let\@endpbox\@@endpbox
+      \@arstrut \@preamble
+   \endgroup
+   \ignorespaces
+   }
+
+\let\@@mkpream=\@mkpream
+\def\@mkpream#1{%
+   \@@mkpream{#1}%
+   \makebaractive
+   }
+\begingroup
+   \def\@makeother{\noexpand\@makeother\noexpand}
+   \xdef\@sanitize{\@sanitize\@makeother\|}
+\endgroup
+\newif\if@print
+
+\def\begin_verbatim{%
+   \endgraf
+   \bigbreak
+   \begingroup
+      \setup_verbatim \makebarother
+      \@printtrue
+      \ignore_rest_line
+   }
+\let\end_verbatim=\endgroup		% internal command !
+\begingroup
+   \obeylines%	% ^^M is active! ==> every line must end with %
+   \gdef\ignore_rest_line#1^^M{\set_next_line}%
+   \gdef\set_next_line#1^^M{\do_set{#1}}%
+\endgroup
+
+\def\do_set#1{%
+   \endgraf
+   \check_print{#1}%
+   \if@print  \indent \print_char#1\end_line\end_line
+   \else  \let\set_next_line\end_verbatim
+   \fi
+   \set_next_line
+   }
+\let\end_line=\relax
+\begingroup
+\obeyspaces\obeytabs
+\gdef\check_print#1{\cut_at_tab#1^^I\end_line}
+\gdef\cut_at_tab#1^^I#2\end_line{\check_first_part#1 \end_line}% blank !
+\gdef\check_first_part#1 #2\end_line{\do_check{#1}}
+\endgroup
+\def\do_check#1{%
+   \def\@line{#1}%
+   \ifx \@line\end_verbatim_line  \@printfalse
+   \fi
+   }
+\newcount\char_count  \char_count\z@
+
+\def\print_char#1#2\end_line{%
+   \print_first_char{#1}%
+   \print_rest_of_line{#2}%
+   }
+{\obeytabs\gdef\@tab{^^I}}
+
+\def\print_first_char#1{%
+   \def\@char{#1}%
+   \advance \char_count\@ne
+   \ifx \@char\@tab  \print_tab
+   \else  \@char
+   \fi
+   }
+\newcount\count_mod_viii
+\def\mod_viii#1{%
+   \count@ #1\relax  \count_mod_viii\count@
+   \divide \count@ 8\relax
+   \multiply \count@ 8\relax
+   \advance \count_mod_viii -\count@
+   }
+\def\print_tab{%
+   \loop  \space \mod_viii\char_count
+      \ifnum \count_mod_viii>\z@
+	 \advance \char_count\@ne
+   \repeat
+   }
+\def\print_rest_of_line#1{%
+   \def\@line{#1}%
+   \ifx \@line\empty  \char_count\z@
+      \def\next##1\end_line{\relax}%
+   \else  \let\next\print_char
+   \fi
+   \next#1\end_line
+   }
+{\catcode`\/=\escape		% / is temporary escape char
+   \catcode`\\=\other
+   /gdef/beginprog{%
+      /gdef/end_verbatim_line{\endprog}%
+      /begin_verbatim
+      }
+   /gdef/beginverbatim{%
+      /gdef/end_verbatim_line{\endverbatim}%
+      /begin_verbatim
+      }
+}				 % here \endgroup can't be used
+\newskip\pre_sect_skip	\pre_sect_skip=2pc plus 1pc minus 6pt
+
+\def\chap_intro{%
+   \gdef\thesection{\arabic{section}.}%
+   \gdef\chap_intro{\newpage}%
+   \addvspace{\pre_sect_skip}%
+   }
+
+\def\sect_intro{%
+   \gdef\thesection{\arabic{section}.}%
+   \global\let\sect_intro\relax
+   }
+\def\chap#1.{%
+   \chap_intro
+   \@startsection{section}{1}%
+      {\z@}%
+      {\m@ne sp}%
+      {\medskipamount}%
+      {\normalsize\bf}%
+      {#1.}%
+   }
+\def\sect{%
+   \sect_intro
+   \@startsection{section}{1}%
+      {\z@}%
+      {\pre_sect_skip}%
+      {\m@ne sp}%
+      {\normalsize\bf}%
+      {\null}%
+   }
+\catcode`\_=\uscode
+
+\endinput

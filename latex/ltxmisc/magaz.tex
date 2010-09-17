@@ -1,0 +1,69 @@
+\documentclass[DIV=9, parskip=half, pagesize=auto]{scrartcl}
+
+\usepackage{fixltx2e}
+\usepackage{etex}
+\usepackage{xspace}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{microtype}
+\usepackage{hyperref}
+
+\newcommand*{\mail}[1]{\href{mailto:#1}{\texttt{#1}}}
+\newcommand*{\pkg}[1]{\textsf{#1}}
+\newcommand*{\cs}[1]{\texttt{\textbackslash#1}}
+\makeatletter
+\newcommand*{\cmd}[1]{\cs{\expandafter\@gobble\string#1}}
+\makeatother
+\addtokomafont{title}{\rmfamily}
+
+\title{The \pkg{magaz} package\thanks{This manual corresponds to \pkg{magaz}~v0.2, dated~04--Sep--2003.}}
+\author{Donald Arseneau,   \mail{asnd@triumf.ca},  Vancouver, Canada}
+\date{04--Sep--2003}
+
+
+\begin{document}
+
+\maketitle
+
+\begin{quote}
+  \small
+  This software is free to distribute, unaltered, and to use in any 
+  application. It may be altered and incorporated in other software freely.
+\end{quote}
+
+This version is just a single tool from a larger body of tools I might
+try to implement if I ever have the spare time.  I'm writing this part
+now [1999] in response to a request on \texttt{comp.text.tex}.
+
+\begin{tabular}{@{}rl@{}}
+  Yes & Special formatting for first line of text in a paragraph          \\
+  No  & Special formatting for for first $n$ lines (allow each different) \\
+  No  & Also for first character (drop caps) (working together)           \\
+  No  & ``Continued on''/``continued from'' markers                       \\
+  No  & wrapfig spanning columns                                          \\
+  No  & wrapfig placed at fixed location on page                          \\
+  NO! & Piecing together fragments of gallies to fit page
+\end{tabular}
+
+
+\minisec{Instructions:}
+
+The ``\cmd{\FirstLine}'' command takes one argument: Some text.
+
+The first line of this text will be formatted according to
+``\cmd{\FirstLineFont}''; but if the text occupies less than a line, all 
+that text (and no more) will be affected by ``\cmd{\FirstLineFont}''.  
+The argument should be ordinary text, not lists and displayed 
+equations. Such things will give you a `Bad text' error.
+
+This command is intended to be used in a replacement for a normal 
+sectioning command in a document class; ``\cmd{\paragraph}'' would be 
+appropriate.  In particular, this ``\cmd{\paragraph}'' (or whatever) should 
+insert vertical space and penalties etc.,\ and probably ``\cmd{\noindent}''
+at the start of the argument.  The document class should also define 
+``\cmd{\FirstLineFont}'' appropriately as either a switch or a text-command; 
+as in ``\verb+\renewcommand\FirstLineFont{\MakeUppercase}+''.  The defult 
+definition is ``\verb+\providecommand\FirstLineFont{\scshape}+''.
+
+\end{document}

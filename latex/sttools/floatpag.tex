@@ -1,0 +1,86 @@
+\documentclass[DIV=8, parskip=half, pagesize=auto]{scrartcl}
+
+\usepackage{fixltx2e}
+\usepackage{etex}
+\usepackage{xspace}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage[utf8]{inputenc}
+\usepackage{microtype}
+\usepackage[unicode=true]{hyperref}
+
+\newcommand*{\mail}[1]{\href{mailto:#1}{\texttt{#1}}}
+\newcommand*{\Mail}[1]{\href{mailto:#1}{\texttt{<#1>}}}
+\newcommand*{\pkg}[1]{\textsf{#1}}
+\newcommand*{\cs}[1]{\texttt{\textbackslash#1}}
+\makeatletter
+\newcommand*{\cmd}[1]{\cs{\expandafter\@gobble\string#1}}
+\makeatother
+\newcommand*{\env}[1]{\texttt{#1}}
+\newcommand*{\opt}[1]{\texttt{#1}}
+\newcommand*{\meta}[1]{\textlangle\textsl{#1}\textrangle}
+\newcommand*{\marg}[1]{\texttt{\{}\meta{#1}\texttt{\}}}
+
+\addtokomafont{title}{\rmfamily}
+
+\title{The \pkg{floatpag} package}
+\author{Vytas Statulevičius\\\mail{vytas@vtex.lt}\\\url{http://www.vtex.lt/tex/download/macros/}}
+\date{1999/04/29}
+
+
+\begin{document}
+
+\maketitle
+
+\section{Purpose:}
+
+provides commands to apply different pagestyles
+to the full page floats.
+
+
+\section{Usage:}
+
+\begin{labeling}{\cmd{\thisfloatpagestyle}\marg{foo}}
+\item[\cmd{\floatpagestyle}\marg{foo}] will apply pagestyle
+  `\meta{foo}' to all pages occupied by full page floats.
+\item[\cmd{\rotfloatpagestyle}\marg{foo}] will apply pagestyle `\meta{foo}'
+  to all pages occupied by sideways figures and tables produced with
+  the help of `\pkg{rotating.sty}' package (Sebastian Rahtz and Leonor
+  Barroca)
+\item[\cmd{\thisfloatpagestyle}\marg{foo}] will apply pagestyle
+  `\meta{foo}' to a page where this command was used inside figure or
+  table environment
+\end{labeling}
+
+
+\section{Default:}
+
+\begin{verbatim}
+\floatpagestyle{headings}
+\rotfloatpagestyle{plain}
+\end{verbatim}
+
+\medskip
+The macros, developed by Sigitas Tolusis \Mail{sigitas@vtex.lt},
+were used in this package.
+
+The following commands from the LaTeX2e kernel were redefined:\\
+\cmd{\@xfloat}, \cmd{\@vtryfc}\\
+The following command from the rotating.sty  was redefined:\\
+\cmd{\@xrotfloat}
+
+\bigskip
+\footnotesize
+\pkg{floatpag.sty}\\
+Copyright 1999 V.\ Statulevičius\\
+V\TeX\ Ltd., Akademijos 4, Vilnius, Lithuania\\
+e-mail \mail{vytas@vtex.lt}\\
+\url{http://www.vtex.lt/tex/download/macros/}
+
+This program can redistributed and/or modified under the terms
+of the \LaTeX\ Project Public License Distributed from CTAN
+archives in directory \texttt{macros/latex/base/lppl.txt}; either
+version~1 of the License, or (at your option) any later version.
+
+\end{document}

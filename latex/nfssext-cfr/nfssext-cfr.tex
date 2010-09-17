@@ -1,0 +1,32 @@
+\documentclass[pagesize=auto, fontsize=14pt, DIV=11]{scrartcl}
+
+\usepackage{fixltx2e}
+\usepackage{etex}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{microtype}
+\usepackage{hyperref}
+
+\newcommand*{\mail}[1]{\href{mailto:#1}{\texttt{#1}}}
+\newcommand*{\pkg}[1]{\mbox{\textsf{#1}}}
+
+\addtokomafont{title}{\rmfamily}
+
+\title{The \pkg{nfssext-cfr} package}
+\author{Clea F. Rees\thanks{\mail{cfrees@imapmail.org}}}
+\date{2008/12/21}
+
+
+\begin{document}
+
+\maketitle
+
+\noindent
+\pkg{nfssext-cfr.sty} is an extension of Philipp Lehman's \pkg{nfssext.sty}\@. \pkg{nfssext.sty} provides commands which enable one to specify font features not covered by the New Font Selection Scheme of \LaTeXe\@. \pkg{nfssext-cfr.sty} provides additional commands, further extending the facilities offered by NFSS.
+
+\pkg{nfssext-cfr.sty} is required by various font support packages I've written. It is being released separately to avoid unnecessary duplication and confusion. At least, I hope it will remove at least one source of unnecessary confusion. I have no reason to think it will avoid any of the others.
+
+The code is highly experimental. It works for me. So far. If you discover problems, please let me know. If you know how to fix them, even better.
+
+\end{document}

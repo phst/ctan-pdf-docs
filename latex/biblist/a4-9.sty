@@ -1,0 +1,324 @@
+% This is A4-9.DOC			  as of 10 Oct 89
+%---------------------------------------------------------
+% (c) 1989 by J.Schrod. copy conditions see below.
+
+%
+% Macro package for a non-arbitrary A4 page layout
+% LaTeX style option
+% MAKEPROG is needed
+%
+
+%
+% DATE	   PERSON  REMARK
+% 89-10-05 -js	   first version
+%
+
+% author's current address:
+%
+%	Detig$\,\cdot\,$Schrod \TeX{}sys
+%	Joachim Schrod
+%	Kranichweg 1
+%
+%	D-6074 R\"odermark-Urberach
+%	FR Germany
+%
+%	Tel. (+6074) 1617
+%	Bitnet: XITIJSCH@DDATHD21
+
+
+
+% should be progtex...
+%%%%
+%%%%
+%%%% These TeX macros were documented with the documentation system
+%%%% MAKEPROG and automatically converted to the current form.
+%%%% If you have MAKEPROG available you may transform it back to
+%%%% the original input: Remove every occurence of three percents
+%%%% and one optional blank from the beginning of a line and remove
+%%%% every line which starts with four percents.  The following lex
+%%%% program will do this:
+%%%%
+%%%%    %%
+%%%%
+%%%%    ^%%%\ ?   ;
+%%%%    ^%%%%.*\n ;
+%%%%
+%%%% MAKEPROG may be obtained over the net from the Bitnet-Listserver
+%%%% LISTSERV@DHDURZ1 (filelist WEBWARE), from tuglib@science.utah.edu,
+%%%% or via ftp from june.cs.washington.edu.
+%%%%
+%%%%
+%%% \documentstyle[progltx,a4-9]{article}
+
+
+%%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% %
+%%% % local macros
+%%% %
+
+%%% \let\mc=\ninrm	       % for names like GNU
+
+%%% \def\WEB{{\tt WEB\/}}
+%%% \def\DVI{{\tt DVI\/}}
+%%% \def\GNU{{\mc GNU}}
+
+%%% \chardef\bs=`\\
+
+%%% \def\fract#1/#2.{%	     % fraction a/b within text
+%%%    \leavevmode		     % borrowed from D. Knuth's manmac
+%%%    \kern .1em
+%%%    \raise .5ex \hbox{\the\scriptfont0 #1}%
+%%%    \kern -.1em/\kern -.15em
+%%%    \lower .25ex \hbox{\the\scriptfont0 #2}%
+%%%    }
+
+%%% %
+%%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%% \begin{document}
+
+
+%%% \title{
+%%%    A non-arbitrary A4 page layout\\
+%%%    The {\tt a4-9\/} style option
+%%%    }
+%%% \author{\sc Joachim Schrod}
+
+%%% \maketitle
+
+
+
+%%% \sect This macro file is the |a4-9| document style option for \LaTeX{}
+%%% that produces a {\it well designed\/} A4 page layout.  This style
+%%% option works with all standard \LaTeX{} styles and should work with
+%%% all other well written ones, too.  It should not be used with an
+%%% underlined headings page style (see below for an explanation).
+
+%%% But what does this mean: ``a {\it well designed\/} page layout''?
+%%% Mostly it means that the design is not chosen by accident but
+%%% within a {\it non-arbitrary process}. To my knowledge this theme
+%%% has first been covered by Jan Tschichold in his famous article of
+%%% 1962: ``Willk\"urfreie Ma\ss{}verh\"altnisse der Buchseite und
+%%% des Satzspiegels'' (look for references at the end).  This style
+%%% option implements his design (I'm no designer\,\dots)
+
+%%% If you are interested in typography and you do not know anything of
+%%% Jan Tschichold, you should---he and Stanley Morrison were probably the
+%%% two most important typographers in this century.  He received as one
+%%% of very few Europeans the gold medal of the American Institute of
+%%% Graphic Arts, was a honorary member of the Double Crown Club, London,
+%%% and of the Soci\'et\'e typographique de France.  Furthermore he was
+%%% appointed as Honorary Royal Designer for Industry by the Royal Society
+%%% of Arts, London.  In 1965 he got the Gutenberg-Preis of the city
+%%% Leipzig (which celebrated its 800th~birthday in this year), the most
+%%% important typographic award in Europe.
+
+
+%%% \sect This program is free software; you can redistribute it and/or
+%%% modify it under the terms of the \GNU{} General Public License as
+%%% published by the Free Software Foundation; either version~1, or (at your
+%%% option) any later version.
+
+%%% This program is distributed in the hope that it will be useful, but
+%%% {\bf without any warranty\/}; without even the implied warranty of
+%%% {\bf merchantability\/} or {\bf fitness for a particular purpose}.  See
+%%% the \GNU{} General Public License for more details.
+
+%%% %You should have received a copy of the \GNU{} General Public License
+%%% %along with this program; if not, write to the Free Software Foundation,
+%%% If you have not received a copy of the \GNU{} General Public License
+%%% along with this program, write to the Free Software Foundation,
+%%% Inc., 675~Mass Ave, Cambridge, MA~02139, USA.
+
+
+%%% \sect This style option implements the partition by nine of the A4
+%%% page as explained by Tschichold.  The proportion for a two-sided
+%%% layout is shown in Figure~\ref{fig:layout} (the picture is not true to
+%%% scale due to the limited features of the \LaTeX{}-{\tt
+%%% picture\/}-environment).
+%%% %
+%%% \begin{figure}
+%%% \unitlength=.3mm
+%%% \begin{center}
+%%% \begin{picture}(420,315) % 420,297
+
+%%% % double page (dashed lines)
+%%% \multiput(0,0)(210,0){2}{\dashbox{5}(210,315){}} % 210,297
+
+%%% % help lines for construction (thin lines)
+%%% \put(  0,  0){\line( 4, 3){420}}
+%%% \put(  0,  0){\line( 2, 3){210}}
+%%% \put(  0,315){\line( 4,-3){420}}
+%%% \put(210,315){\line( 2,-3){210}}
+
+%%% \put(280,315){\line( 0,-1){105}}
+%%% \put(140,210){\line( 4, 3){140}}
+
+%%% % resulting pages (thick lines)
+%%% \thicklines
+%%% \multiput(46.66666,70)(186.66666,0){2}{\framebox(140,210){}} % 140,198
+
+%%% \end{picture}
+%%% \end{center}
+%%% \caption{Partition by nine of the A4 page according to Tschichold}
+%%% \label{fig:layout}
+%%% \end{figure}
+%%% %
+%%% The important fact is that the proportions of the type area and the
+%%% margins repeat the proportion of the whole page.  The above
+%%% construction yields margins with a ratio of $ \sqrt{2} : 1 : 2 :
+%%% 2\sqrt{2} $, where 1 is the ninth of the page width, i.e.\ $\rm
+%%% 23\fract 1/3. \,mm$. But we do not use this exact value because
+%%% the margin will be shortened by bookbinding or filing. We assume a
+%%% total need of 8\,mm for such purposes which results in 4\,mm for
+%%% each page. This 4\,mm will first be subtracted from the total
+%%% margin width of 70\,mm and the remaining 66\,mm will be divided
+%%% into one third for the inner margin and two third for the outer
+%%% margin. The resulting approximate values are therefore: 
+%%% %
+%%% \begin{center}
+%%% \begin{tabular}{lr}
+%%% \multicolumn1{c}{\sc Dimension}& \multicolumn1{c}{\sc Value}\\[2pt]
+%%% page width& 210\,mm\\
+%%% width of type area& 140\,mm\\
+%%% inner margin& 26\,mm\\
+%%% outer margin& 44\,mm\\[1pt]
+%%% page height& 297\,mm\\
+%%% height of type area& 198\,mm\\
+%%% top margin& 33\,mm\\
+%%% bottom margin& 66\,mm\\
+%%% \end{tabular}
+%%% \end{center}
+%%% %
+%%% The value for the inner margin consists of 4\,mm for binding and
+%%% filing purposes and 22\,mm ``real'' margin. Of course, all values
+%%% are measured from the paper edge. 
+
+%%% If the page layout is not for two-sided printing, it can be still
+%%% assumed that a margin of c\`a.~4\,mm will be needed for filing.
+%%% This remaining margin space of 66\,mm is distributed evenly on the
+%%% left and on the right side. Precisely spoken, we use 37\,mm for
+%%% the left margin ($\rm = 33\,mm + 4\,mm$) and 33\,mm for the right
+%%% margin. The resulting margins have a ratio of $1 : 1 : 1 :
+%%% 2\sqrt{2}$. 
+
+
+%%% \sect The height of the type area needs a special remark: Usually this
+%%% height does neither include the headline nor the footline. But if the
+%%% headline is underlined the headline should be taken into
+%%% account---that's the reason why this style option cannot be used with
+%%% underlined headings.
+
+%%% The values in the above table are only approximations to the one
+%%% we will use in reality. An approximation because the height of the
+%%% type area must be a multiple of a line height, i.e.\ it must equal
+%%% $ (n-1)|\baselineskip| + |\topskip| $ where $n$ is the number of lines
+%%% on one page. If we have to choose we will prefer the longer type area.
+
+
+%%% \sect We assume a starting position of $\rm (2\,cm, 2\,cm)$, i.e., the
+%%% \DVI{} driver shall leave a top and a left margin of 2\,cm by his own. This is
+%%% different from the usual 1\,in margin---but the usual margin was made
+%%% for legal paper ($\rm 8\,in \times 11.5\,in$). I hope that this 
+%%% driver margin value---which was presented by Klaus Guntermann and 
+%%% me at the Euro\TeX88 conference in Exeter---will be accepted
+%%% by the \DVI{} driver standards commitee of TUG.
+
+%%% |\hoffset| and |\voffset| are set to 0\,mm, so that we can proceed on
+%%% the assumption of the above margin. If you use a driver which leaves a
+%%% margin of 1\,in you should use the changefile |a4-marg.chf|.
+
+%%% \beginprog
+\hoffset=2cm  \advance\hoffset by -1in
+\voffset=2cm  \advance\voffset by -1in
+%%% \endprog
+
+
+%%% \sect To get the precise value of |\textheight| we first calculate the
+%%% number of lines which may be on the page in full. Then we add another
+%%% line and recalculate the value of |\textheight|.
+
+%%% \beginprog
+\normalsize			 % this sets \baselineskip
+
+\dimen@=198mm
+\count@=\dimen@ 		 % value in sp
+\advance \count@ by -\topskip	 % \topskip and \baselineskip will be
+\divide \count@ by \baselineskip %	coerced to integer, value is in sp
+
+\textheight=\count@\baselineskip % \count@ equals the number of lines - 1
+\advance \textheight by \topskip
+%%% \endprog
+
+
+%%% \sect Because we have altered the original value of |\textheight|
+%%% (198\,mm) we must alter the value of the top margin, too.  It will be
+%%% just a third of the remaining place on the page.  Please note that the
+%%% place for the top margin consists of the four values driver
+%%% margin, |\topmargin|, |\headheight|, and |\headsep|. 
+
+%%% \beginprog
+\topmargin=297mm
+   \advance \topmargin by -\textheight % place for top and bottom margin
+   \divide \topmargin by 3	       % place for top margin
+   \advance \topmargin by -20mm	       % driver margin
+   \advance \topmargin by -\headheight
+   \advance \topmargin by -\headsep
+
+\textwidth=140.1mm
+\if@twoside
+   \oddsidemargin=6mm		       % 26mm - 20mm (driver margin)
+   \evensidemargin=24mm		       % 44mm - 20mm (driver margin)
+   \marginparwidth=33mm		       % half of total vertical margin
+\else
+   \oddsidemargin=17mm		       % 37mm - 20mm (driver margin)
+   \marginparwidth=22mm		       % third of total vertical margin
+   \evensidemargin=\maxdimen	% usage should result in an error message
+\fi
+%%% \endprog
+
+
+%%% \sect We finish the macro file so that garbage (e.g.\ of exchanges
+%%% between systems) can come afterwards.
+
+%%% \beginprog
+\endinput
+%%% \endprog
+
+
+%%% %%%
+%%% \newpage
+%%% %%%
+
+%%% \sect It remains to give a few pointers to the article where the
+%%% design which was implemented here has been described:
+%%% %
+%%% \begin{itemize}
+
+%%% \item {\sc Jan Tschichold}: 
+%%% Willk\"urfreie Ma\ss{}verh\"altnisse der Buchseite und des Satzspiegels.
+%%% In {\it Typographische Monatsbl\"atter}.
+%%% February 1964.
+
+%%% \item {\sc Jan Tschichold}: 
+%%% Non-arbitrary proportions of page and type area.
+%%% In {\it Print in Britain}.
+%%% London: September 1963.
+
+%%% \item {\sc Jan Tschichold}: 
+%%% Proportions rationelles du format du livre et de la page imprim\'ee.
+%%% In {\it Revue suisse d'imprimerie}, 4.
+%%% St-Gall 1964.
+
+%%% \end{itemize}
+%%% %
+%%% The original paper is a private edition which can not be bought, it
+%%% was published in 1962. It appeared in seven different publications
+%%% in german language, three times in french, two times in dutch.
+%%% Besides being translated to english, it was translated to danish, 
+%%% norwegian, finn, italian, and hungarian.
+
+
+
+%%% \end{document}

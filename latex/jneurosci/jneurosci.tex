@@ -1,0 +1,81 @@
+\documentclass[DIV=8, parskip=half, pagesize=auto]{scrartcl}
+
+\usepackage{fixltx2e}
+\usepackage{etex}
+\usepackage{xspace}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage[utf8]{inputenc}
+\usepackage{booktabs}
+\usepackage{microtype}
+\usepackage{hyperref}
+
+\newcommand*{\mail}[1]{\href{mailto:#1}{\texttt{#1}}}
+\newcommand*{\pkg}[1]{\textsf{#1}}
+\newcommand*{\cs}[1]{\texttt{\textbackslash#1}}
+\makeatletter
+\newcommand*{\cmd}[1]{\cs{\expandafter\@gobble\string#1}}
+\makeatother
+\newcommand*{\meta}[1]{\textlangle\textsl{#1}\textrangle}
+\newcommand*{\marg}[1]{\texttt{\{}\meta{#1}\texttt{\}}}
+
+\addtokomafont{title}{\rmfamily}
+
+\title{The \pkg{jneurosci} package\thanks{This manual corresponds to \pkg{jneurosci}~v1.00, dated~2004 April 06.}}
+\author{Matthias Hennig (\mail{hennig@cn.stir.ac.uk})}
+\date{2004 April 06}
+
+
+\begin{document}
+
+\maketitle
+
+\noindent
+This is a slightly modified version of the \pkg{namedplus} style, which fully conforms
+with the Journal of Neuroscience citation style.
+
+The following citation labels are implemented:
+%
+\begin{labeling}{\cmd{\citeauthoryear}\marg{author-info}\marg{year}:}
+\item[\cmd{\citeauthoryear}\marg{author-info}\marg{year}:] these labels are processed by the following commands: 
+\item[\cmd{\cite}\marg{key}:] which produces citations with both author and year, enclosed in parens. 
+\item[\cmd{\shortcite}\marg{key}:] which produces citations with year only, enclosed in parens 
+\item[\cmd{\citeauthor}\marg{key}:] which produces the author information only 
+\item[\cmd{\citeyear}\marg{key}:] which produces the year information only 
+\item[\cmd{\citetext}\marg{key}:] which produces Author (Year) 
+\item[\cmd{\citenoparens}\marg{key}:] which produces Author, Year 
+\end{labeling}
+
+The output looks like that:
+%
+\begin{labeling}{\cmd{\citetext}\marg{key}:}
+\item[\cmd{\cite}\marg{key}:] (Strettoi and Masland, 1996; Kolb, 1997; Masland, 2001) and (Fisher et al., 1975)
+\item[\cmd{\citetext}\marg{key}:] for reviews, see McNaughton (1990); Müller and Kaupp (1998); Fain et al. (2001).
+\end{labeling}
+
+The bibliography follows J~Neurosci conventions, e.\,g.:
+%
+\begin{itemize}
+\item Koch C (1999) Biophysics of Computation: Information Processing in Single Neurons Oxford University Press.
+\item Enroth-Cugell C, Robson JG (1966) The contrast sensitivity of retinal ganglion cells of the cat. J~Physiol 187:517-552. 
+\end{itemize}
+ 
+This is a modified version of the \pkg{namedplus} style by:
+
+\begin{tabular}{@{}ll@{}}
+  \toprule
+  A. David Redish & \mail{adr@nsma.arizona.edu}                               \\
+  Post-doc        & \url{http://www.cs.cmu.edu/~dredish}                      \\
+  \multicolumn{2}{@{}l@{}}{Neural Systems, Memory and Aging, Univ of AZ, Tucson AZ} \\
+  \bottomrule
+\end{tabular}
+
+which was in turn modified by:\\
+Oren Patashnik (\mail{PATASHNIK@SCORE.STANFORD.EDU})
+
+and finally modified by:\\
+Matthias H Hennig, University of Edinburgh, \mail{mhennig@inf.ed.ac.uk}
+
+\end{document}
+

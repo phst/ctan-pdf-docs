@@ -1,0 +1,298 @@
+\documentclass[pagesize=auto]{scrartcl}
+
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{microtype}
+\usepackage{hyperref}
+
+\addtokomafont{disposition}{\rmfamily}
+
+\lstset{language=[LaTeX]TeX, columns=fullflexible, basicstyle=\small\ttfamily, commentstyle=\color{gray}}
+
+\title{The \textsf{IEEEtrantools} package}
+\author{Michael Shell}
+\date{2007/01/11}
+
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\bigskip
+
+\noindent
+This is a PDF version of \texttt{IEEEtrantools\_doc.txt} 2007/01/11 version 1.2
+(Version 1.2 is based on the commands of version 1.7 of IEEEtran.cls) \\
+This document is the user guide for the \textsf{IEEEtrantools.sty} package.
+
+The \textsf{IEEEtrantools.sty} package provides several popular and unique
+commands from the \textsf{IEEEtran.cls} class (version 1.7) file.
+
+\textsf{IEEEtrantools.sty} should not be used with \textsf{IEEEtran.cls}.
+
+For helpful tips, answers to frequently asked questions and other support,
+visit the IEEEtrantools support page at my website: \\
+\url{http://www.michaelshell.org/tex/ieeetran/tools/}
+
+The latest version and documentation of IEEEtrantools can be obtained at: \\
+\url{http://www.ctan.org/tex-archive/macros/latex/contrib/IEEEtran/}
+
+Copyright \textcopyright\ 2002--2007 by Michael Shell \\
+See
+\url{http://www.michaelshell.org/}
+for current contact information.
+
+
+\section{Legal Notice:}
+
+This code is offered as-is without any warranty either expressed or
+implied; without even the implied warranty of MERCHANTABILITY or
+FITNESS FOR A PARTICULAR PURPOSE!\@
+User assumes all risk.
+In no event shall IEEE or any contributor to this code be liable for
+any damages or losses, including, but not limited to, incidental,
+consequential, or any other damages, resulting from the use or misuse
+of any information contained here.
+
+All comments are the opinions of their respective authors and are not
+necessarily endorsed by the IEEE.
+
+This work is distributed under the \LaTeX\ Project Public License (LPPL)
+(\url{http://www.latex-project.org/}) version 1.3, and may be freely used,
+distributed and modified. A copy of the LPPL, version 1.3, is included
+in the base \LaTeX\ documentation of all distributions of \LaTeX\ released
+2003/12/01 or later.
+Retain all contribution notices and credits.
+\emph{Modified files should be clearly indicated as such, including
+renaming them and changing author support contact information.}
+
+File list of work: \texttt{IEEEtrantools.sty}, \texttt{IEEEtrantools\_doc.txt}
+
+
+\section{Available package options}
+
+e.\,g., \verb+\usepackage[retainorgcmds]{IEEEtrantools}+
+
+\begin{description}
+\item[retainorgcmds]
+  Prevents \textsf{IEEEtrantools} from overriding existing \LaTeX\ commands.
+  Currently, the only effect is to preserve the original definitions
+  of \texttt{itemize}, \texttt{enumerate} and \texttt{description}. The \textsf{IEEEtran} versions are
+  always available as \texttt{IEEEitemize}, \texttt{IEEEenumerate} and \texttt{IEEEdescription}
+  and the original \LaTeX\ versions are always available as \texttt{LaTeXitemize},
+  \texttt{LaTeXenumerate} and \texttt{LaTeXdescription}.
+\end{description}
+
+
+\section{1/2007 V1.2 (V1.7 of \texttt{IEEEtran.cls}) changes:}
+
+\begin{enumerate}
+\item Several commands and enviroments have depreciated in favor of
+  replacements with IEEE prefixes to better avoid potential future name
+  clashes with other packages. Legacy code retained to allow use of the
+  obsolete forms, but with an warning message to the console during
+  compilation:
+  \verb+\IEEEPARstart+\\
+  For IED lists:
+  \verb+\IEEEiedlabeljustifyc+, \verb+\IEEEiedlabeljustifyl+,\\ \verb+\IEEEiedlabeljustifyr+,
+  \verb+\IEEEnocalcleftmargin+, \verb+\IEEElabelindent+,\\ \verb+\IEEEsetlabelwidth+,
+  \verb+\IEEEusemathlabelsep+
+\item These commands/lengths now require the IEEE prefix and do not have
+  legacy support: \verb+\IEEEnormaljot+.\\
+  For IED lists: \verb+\ifIEEEnocalcleftmargin+, \verb+\ifIEEEnolabelindentfactor+,\\
+  \verb+\IEEEiedlistdecl+, \verb+\IEEElabelindentfactor+
+\item \verb+\normalsizebaselineskip+ no longer provided.
+\item New \verb+\IEEEPARstart+ controls:
+  \verb+\IEEEPARstartHEIGHTTEXT+,\\ \verb+\IEEEPARstartFONTSTYLE+, \verb+\IEEEPARstartCAPSTYLE+,\\
+  \verb+\IEEEPARstartWORDFONTSTYLE+, \verb+\IEEEPARstartWORDCAPSTYLE+,\\
+  \verb+\IEEEPARstartHOFFSET+, \verb+\IEEEPARstartITLCORRECT+\\
+  and the (output) length \verb+\IEEEPARstartletwidth+.
+\item Provide for an optional argument to \verb+\bstctlcite+ to provide a way to
+  specify a different aux file. Define \verb+\bstctlcite+ even if it has already
+  been defined.
+\end{enumerate}
+
+
+\section{11/2002 V1.1 (v1.6b of \texttt{IEEEtran.cls}) changes:}
+
+\begin{enumerate}
+\item In addition to the IEEE IED lists, the original LaTeX IED style list
+  environments are now preserved as \texttt{LaTeXitemize}, \texttt{LaTeXenumerate}, and
+  \texttt{LaTeXdescription}. Also, users can now redefine \verb+\makelabel+ within
+  IEEE IED list controls. There may be some use for these in specialized
+  applications. Thanks to Eli Barzilay for suggesting this feature.
+\end{enumerate}
+
+
+\section{Package Description}
+
+The \textsf{IEEEtrantools.sty} package provides several commands from \textsf{IEEEtran.cls}
+so that they can be used under other \LaTeX\ classes. This guide covers only
+the differences in the use of the commands from those provided by
+\textsf{IEEEtran.cls}. For complete documentation on these commands, see the relevant
+sections in the \texttt{IEEEtran\_HOWTO} manual which is available at the CTAN site.
+
+\textsf{IEEEtrantools.sty} provides \verb+\IEEEPARstart+; the \verb+\bstctlcite+ command for the
+control entry types of \texttt{IEEEtran.bst} V1.00 and later; the IEEE IED list
+environments; and the complete \texttt{IEEEeqnarray} family, including the
+\texttt{IEEEeqnarray} support commands.
+
+Please note that, as a package file, \textsf{IEEEtrantools.sty} will not attempt
+to alter document formatting (other than the override of the IDE lists,
+if the \texttt{retainorgcmds} option is not invoked) as controlled by the class
+file. Therefore, there may be spacing/layout differences between the
+results of the same \textsf{IEEEtran} commands under \textsf{IEEEtran.cls} and the user's
+class file as different fonts, default values for the various length
+commands, etc., are used than under \textsf{IEEEtran.cls}.
+
+
+\section{\texttt{\textbackslash IEEEPARstart}}
+
+\verb+\IEEEPARstart{}{}+ is used to provide a large initial ``drop cap'' letter(s) as
+well as to capitialize the remaining letters of the first word of a chapter
+or section (if placed within the second argument). e.\,g.,\\
+\verb+\IEEEPARstart{O}{nce}+
+
+Unlike \textsf{IEEEtran.cls}, \textsf{IEEEtrantools.sty} provides the user with a way to
+control the various parameters of the \verb+\IEEEPARstart+ letters.
+
+Below is how the user can alter them (after the \textsf{IEEEtrantools.sty} package
+is loaded). Default values are shown. \textsf{IEEEtrantools} will not override
+any previous definitions of these parameters if they already exist when
+the package is loaded.
+%
+\begin{lstlisting}
+% The number of lines that are indented to clear the drop cap letter.
+% You may need to increase this beyond 1 + \IEEEPARstartDROPDEPTH if
+% you are using lowercase letters with descenders.
+\renewcommand{\IEEEPARstartDROPLINES}{2}
+
+% The minimum number of lines left on a page to allow an \IEEEPARstart.
+% Does not take into consideration glue shrink, so it tends to be overly
+% cautious.
+\renewcommand{\IEEEPARstartMINPAGELINES}{2}
+
+% The height of the drop cap (*above* the baseline), is adjusted to match
+% the height of this text in the current font (when \IEEEPARstart is called).
+% Use a strut if you want a height not based on that of the main text font.
+\renewcommand{\IEEEPARstartHEIGHTTEXT}{T}
+
+% The depth the letter is lowered below the baseline. The height (and size)
+% of the letter is determined by the sum of this value and the height of
+% \IEEEPARstartHEIGHTTEXT in the current font. It is a good idea to set this
+% value in terms of the baselineskip so that it can respond to changes
+% therein.
+\renewcommand{\IEEEPARstartDROPDEPTH}{1.1\baselineskip}
+
+% The font the drop cap will be rendered in. The argument is a command that
+% can take zero or one argument.
+\renewcommand{\IEEEPARstartFONTSTYLE}{\bfseries}
+
+% Any additional, non-font related commands needed to modify the drop cap
+% letter, can take zero or one argument.
+\renewcommand{\IEEEPARstartCAPSTYLE}{\MakeUppercase}
+
+% The font that will be used to render the rest of the word (second argument
+% to \IEEEPARstart), can take zero or one argument.
+\renewcommand{\IEEEPARstartWORDFONTSTYLE}{\relax}
+
+% Any additional, non-font related commands needed to modify the rest of the
+% word (second argument to \IEEEPARstart), can take zero or one argument.
+\renewcommand{\IEEEPARstartWORDCAPSTYLE}{\MakeUppercase}
+
+% The horizontal separation distance from the drop letter to the main text.
+% Lengths that depend on the font (i.e., ex, em, etc.) will be referenced to
+% the font that is active when \IEEEPARstart is called.
+\renewcommand{\IEEEPARstartSEP}{0.15em}
+
+% The Horizontal offset applied to the left of the drop cap. The drop cap
+% can be shifted left (negative) or right (positive) using this parameter.
+% Lengths that depend on the font (e.g., ex, em, etc.) will be referenced
+% to the font that is active when \IEEEPARstart is called.
+\renewcommand{\IEEEPARstartHOFFSET}{0em}
+\end{lstlisting}
+
+For \verb+\IEEEPARstartSEP+ and \verb+\IEEEPARstartHOFFSET+, you can also reference the
+length variable, \verb+\IEEEPARstartletwidth+, which will be set to the width of
+the drop drop before it is rendered. e.\,g.,\\
+\verb+\renewcommand{\IEEEPARstartHOFFSET}{-0.5\IEEEPARstartletwidth}+\\
+will cause the drop cap to be shifted leftward by half its width.
+%
+\begin{lstlisting}
+% Italic correction command applied at the end of the drop cap when
+% evaluating its width. Without this, italic or slanted drop cap letters will
+% "crash into" the main text because their full true width is not taken into
+% consideration.
+\renewcommand{\IEEEPARstartITLCORRECT}{\/}
+\end{lstlisting}
+
+
+\section{\texttt{\textbackslash bstctlcite}}
+
+\verb+\bstctlcite{}+ is used to issue a citation for a special \texttt{IEEEtran.bst} BibTeX
+style control entry which can control various operating parameters of the
+\texttt{IEEEtran.bst} file (V1.00 and later):\\
+\verb+\bstctlcite{IEEEexample:BSTcontrol}+
+
+V1.2 and later of \textsf{IEEEtrantools.sty} provides for an optional argument so
+that different auxiliary file specifiers may be used in documents with
+multiple bibliographies:\\
+\verb+\bstctlcite[@auxoutsec]{IEEEexample:BSTcontrol}+
+
+See the \texttt{IEEEtran.bst} documentation for details:\\
+\url{http://www.ctan.org/tex-archive/macros/latex/contrib/IEEEtran/bibtex}\\
+\url{http://www.michaelshell.org/tex/ieeetran/bibtex/}
+
+\verb+\bstctlcite+ operates silently and will not alter the citation numbers or
+place a citation entry into the main text or bibliography (when used with
+\texttt{IEEEtran.bst}). It should not be used with \texttt{.bst} files that do not provide
+support for these special BST control entries.
+
+See the \texttt{IEEEtran.bst} BibTeX style documentation for details.\\
+\url{http://www.michaelshell.org/tex/ieeetran/bibtex/}\\
+\url{http://www.ctan.org/tex-archive/macros/latex/contrib/IEEEtran/bibtex}
+
+
+\section{\texttt{itemize}, \texttt{enumerate} and \texttt{description} (IED) lists}
+
+\textsf{IEEEtrantools} provides revised itemize, enumerate and description list
+environments that offer enhanced controls and make it much easier to
+create such lists when the main text is ``block indented'' from the 
+labels (IEEE style).
+
+By default, the \LaTeX\ IED list environments are overridden with the IEEE
+IED versions. To prevent this, load \textsf{IEEEtrantools.sty} with the
+``\texttt{retainorgcmds}'' option:\\
+\verb+\usepackage[retainorgcmds]{IEEEtrantools}+
+
+In any event, the IEEE IED list environments are available as\\ \texttt{IEEEitemize},
+\texttt{IEEEenumerate}, and \texttt{IEEEdescription}. The IEEE IED lists depend on the \LaTeX\ %
+low-level \texttt{list} environment, so class files that redefine it may also alter
+the IEEE IED list formatting. The original \LaTeX\ IED environments (as
+provided by the \LaTeX\ kernel and class file) are always retained as
+\texttt{LaTeXitemize}, \texttt{LaTeXenumerate} and \texttt{LaTeXdescription}.
+
+Beware that the default enumerate label width will not be correct if
+the class file is not using normalfont ``9)'' style labeled enumerated lists.
+
+The support commands for the IEEE IED list environments (\verb+\IEEEsetlabelwidth+,
+\verb+\IEEEusemathlabelsep+, \verb+\IEEEiedlabeljustifyl+, etc.) are also provided.
+
+
+\section{The \texttt{IEEEeqnarray} family}
+
+Please note that \textsf{IEEEtrantools} provides and sets the length variable
+\verb+\IEEEnormaljot+. As IEEEtrantools is loaded, \verb+\IEEEnormaljot+ will be set to
+the current value of \verb+\jot+. If the user later alters the document's nominal
+\verb+\jot+ the value of \verb+\IEEEnormaljot+ should be revised as well.
+
+The support commands for the \texttt{IEEEeqnarray} commands (\verb+\IEEEstrut+,\\ 
+\verb+\IEEEeqnarrayvrule+, \verb+\IEEEvisiblestrutstrue+, etc.) are also provided.
+
+
+\end{document}

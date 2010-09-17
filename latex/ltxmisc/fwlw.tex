@@ -1,0 +1,90 @@
+\documentclass[pagesize=auto]{scrartcl}
+
+\usepackage{fixltx2e}
+\usepackage{etex}
+\usepackage{xspace}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{booktabs}
+\usepackage{microtype}
+\usepackage[unicode=true]{hyperref}
+
+\newcommand*{\mail}[1]{\href{mailto:#1}{\texttt{#1}}}
+\newcommand*{\pkg}[1]{\textsf{#1}}
+\newcommand*{\cls}[1]{\textsf{#1}}
+\newcommand*{\cs}[1]{\texttt{\textbackslash#1}}
+\makeatletter
+\newcommand*{\cmd}[1]{\cs{\expandafter\@gobble\string#1}}
+\makeatother
+\newcommand*{\env}[1]{\texttt{#1}}
+\newcommand*{\opt}[1]{\texttt{#1}}
+\newcommand*{\meta}[1]{\textlangle\textsl{#1}\textrangle}
+\newcommand*{\marg}[1]{\texttt{\{}\meta{#1}\texttt{\}}}
+\newcommand*{\oarg}[1]{\texttt{[}\meta{#1}\texttt{]}}
+\newcommand*{\BibTeX}{Bib\kern-0.08em\TeX\@\xspace}
+\newcommand*{\BigTeX}{Big\kern-0.08em\TeX\@\xspace}
+
+\pdfstringdefDisableCommands{%
+  \def\BibTeX{BibTeX\xspace}%
+  \def\BigTeX{BigTeX\space}%
+}
+
+\addtokomafont{title}{\rmfamily}
+
+\title{The \pkg{fwlw} package}
+\subtitle{First Word, Last Word}
+\author{Donald Arseneau}
+\date{1995}
+
+
+\begin{document}
+
+\maketitle
+
+\noindent
+Modifications to \LaTeX\ output mechanism to determine the first and
+last words on the current page, plus the first word on the \emph{next}
+page.  These can be used in head-lines or foot-lines.  The `words'
+you see may not be real words, but any unbreakable object.
+
+Such labelling does not make sense when \cmd{\chapter} generates a page
+break, so the last page before a \cmd{\chapter} (or any \cmd{\clearpage}) gets 
+a blank ``next word'', and the first page of the chapter gets a blank
+``first word''.  There is a problem when footnotes split: the ``next word''
+is blank.
+
+Two pagestyles are defined to print these words: \verb+\pagestyle{NextWordFoot}+
+which helps you read ahead to the word on the next page; and \verb+\pagestyle{fwlwhead}+
+which is like the headers in a lexicon.  Or you can use the
+words in your own page-style\ldots
+
+The words are available in the box registers:
+%
+\begin{labeling}[\hspace{\labelsep}--]{\cmd{\FirstWordBox}}
+\item[\cmd{\FirstWordBox}] first word on this page
+\item[\cmd{\NextWordBox}] first word on next page
+\item[\cmd{\LastWordBox}] last word on this page
+\end{labeling}
+%
+Use them in your header lines like: \verb+\copy\LastWordBox+.
+
+Note that `words' may be things like:
+%
+\begin{itemize}
+\item \verb+two~words+
+\item \verb+[ ]Word+  (\verb+[ ]+ represents a parindent box)
+\item a whole displayed equation
+\item the first column of an aligned equation
+\item anomalously blank, if there are \cmd{\write}s or split footnotes etc.
+\item partial words like  \verb+par-+  or  \verb+-tial+.
+\end{itemize}
+
+An entirely different approach is possible using \cmd{\mark} and \cmd{\obeyspaces},
+and would have different problems.  The problems with catcode changes
+may be more or less serious for your particular application.  You are
+welcome to write a package using that method.  The best solution would 
+involve \cmd{\mark} and an input filter program to 
+`\verb+\w{tag} \w{each} \w{word}, \w{in} \w{some} \w{way}+.'
+
+\end{document}

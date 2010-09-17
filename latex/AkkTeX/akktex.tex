@@ -1,0 +1,81 @@
+\documentclass[DIV=9, pagesize=auto]{scrartcl}
+
+\usepackage{fixltx2e}
+\usepackage{xspace}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{microtype}
+\usepackage{hyperref}
+
+\newcommand*{\AkkTeX}{Akk\kern-0.09em\TeX\@\xspace}
+
+\pdfstringdefDisableCommands{%
+  \def\AkkTeX{AkkTeX\xspace}%
+}
+
+\title{\AkkTeX\ -- \LaTeX\ utilities by Igor Akkerman (\url{http://www.akktex.org/})}
+\author{Igor Akkerman}
+\date{2005/05/05}
+
+
+\begin{document}
+
+\maketitle
+
+\section{Main Features:}
+
+\begin{itemize}
+\item new document classes for technical documents, thesis works, mathematical
+  manuscripts and lecture notes
+\item many math packages providing a tremendous nuber of macros for mathematical
+  texts
+\item layout providing a non-empty parskip with extended length corrections and
+  new section definition commands
+\item easy label creation for counters
+\item German language tools and predefined abbreviations
+\end{itemize}
+
+
+\section{\AkkTeX summary}
+
+\AkkTeX consists of a collection of new \LaTeX\ document classes and a very large
+set of \LaTeX\ packages with hundreds of new macros simplifying the creation of
+scientific papers. The packages have all been created within years of practical
+work with \LaTeX.
+
+\AkkTeX\ provides document classes for mathematical lecture notes, elegant
+working sheets, thesis works and many more. They are designed for easy-to-use
+generation of the specified kinds of documents.
+
+Additionally, the \AkkTeX\ packages provide a tremendous number of macros,
+especially for mathematic texts. Their goal is to reduce the creation time of
+documents to a minimum, such that, for example, to type a mathematic paper does
+not take longer than to write it by hand. Another advantage over usual \LaTeX\ %
+typing is that the macro names are subject-specific, not symbol-oriented.
+That is, the author can think less about the \LaTeX\ symbol names, but instead,
+can call them by their meaning. The \verb+\set+ macro is just the simplest example.
+Not only typing becomes more intuitive, but also, reading the \LaTeX\ source code,
+changing and refactoring it is made easier.
+
+The latest release can be found at:
+\url{http://www.akktex.org/}
+     
+Browse our CVS repository for the latest versions of the packages and document
+classes at:
+\url{http://sourceforge.net/cvs/?group_id=160672}
+
+\bigskip
+\noindent\null\hfill$*\quad*\quad*\quad$\hfill\null\par
+\bigskip
+
+\noindent
+This work may be distributed and/or modified under the
+conditions of the \LaTeX\ Project Public License (latest version).
+The latest version of this license can be found at
+\url{http://www.latex-project.org/lppl.txt}
+
+This file may only be distributed together with a copy of the
+`\AkkTeX' bundle.
+The files belonging to the `\AkkTeX' bundle are listed above in this file.
+
+\end{document}

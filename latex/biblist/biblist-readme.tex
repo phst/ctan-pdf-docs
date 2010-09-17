@@ -1,0 +1,106 @@
+\documentclass[DIV=9, pagesize=auto]{scrartcl}
+
+\usepackage{xspace}
+\usepackage{shortvrb}
+
+\newcommand*{\BibTeX}{Bib\kern-0.08em\TeX\@\xspace}
+\newcommand*{\BigTeX}{Big\kern-0.08em\TeX\@\xspace}
+\newcommand*{\ILaTeX}{I\kern0.03em\LaTeX\@\xspace}
+
+\addtokomafont{title}{\rmfamily}
+
+\MakeShortVerb{|}
+
+\title{The \textsf{biblist} package\thanks{This manual corresponds to \textsf{biblist}~v1.2, dated~1992/01/13}}
+\author{Joachim Schrod\thanks{Computer Science Department, Technical University of Darmstadt, Germany} \\ Email: \texttt{schrod@iti.informatik.th-darmstadt.de}}
+\date{1992/01/13}
+
+
+\begin{document}
+
+\maketitle
+
+\noindent
+
+There is an often asked question: `How can I print a listing with all
+entries of a \BibTeX database?'. The common answer is: `Use
+|\nocite{*}|.'
+
+Well, but this will not work for large \BibTeX databases unless you
+use \BigTeX. This is because for each entry a \TeX\ macro is declared
+and \TeX's pool size capacity (where macro names are stored) will be
+exceeded soon.
+
+\medskip
+
+This style option is appropriate to create a typeset listing of a
+(possibly large) \BibTeX input file. With such large files --~%
+especially, if the cite keys are long~-- the needed string space is
+often exceeded. Often a \BigTeX is available to circumstance this
+problem, but with this style option each \TeX\ will do it.
+
+You have to prepare a \LaTeX\ document which uses the |article|
+style and the |biblist| style option. You may add almost all other
+style options, as you wish, e.\,g., |twoside|, |german| (or other
+language style options), |a4|, etc. This style option must be used
+with a ragged bottom; this has the effect, that it cannot be used with
+|twocolumn| or |multicol|.
+
+You must issue a |\bibliography| tag which names all \BibTeX
+databases which you want to print. You may issue a
+|\bibliographystyle| tag to specify how \BibTeX will process its
+databases. (In fact, you usually must issue it since the default
+bibliography style is not available on most installations; see
+below.) You may issue |\nocite| commands if you want to print only
+selected entries from the databases.
+
+\medskip
+
+A ``bug'' you may encounter is that |\cite| tags within
+\BibTeX entries will not be processed. Instead the cite key itself
+will be printed. Note that this is not a bug, this is a feature! You
+have to use |\nocite| tags for \emph{all} entries that shall be
+included in the listing. If you do not give any |\nocite| tag at all,
+a listing with all entries is created.
+
+Note that this style option assumes that you use either \LaTeX~2.09
+released after December 1991, \ILaTeX, or the \textsf{babel} system.
+Particulary, it requires the definition of |\refname| which is supplied
+by these systems. (Of course, you may supply this definition by
+yourself.)
+
+\medskip
+
+The entries in the resulting listing are formatted as follows:
+%
+\begin{quote}
+  \texttt{cite key}~\leaders\hbox{.}\hfill~\textsf{(Library info)}\\
+  \null\quad Author(s).\\
+  Title.\\
+  Publication info.\\
+  Notes.\\
+  \null\quad{\footnotesize Annotation}
+\end{quote}
+%
+I.\,e., an open format is used. Although this needs more space I think
+the enhanced legibility pays back.
+
+Note that you will not get the `Library info' and the `Annotation' in
+the above format if your bibliography style does not supply this
+information with the assumed markup. The parenthesis around the library
+info are produced by this style option, not by \BibTeX.
+
+Enjoy. btw, this style is supported since I use it myself :-)
+
+
+\minisec{Changes:}
+%
+\begin{itemize}
+\item Revision 1.2, 1992/01/13:
+  Updated documentation, adapted to \LaTeX\ version of Dec 91.
+  New \texttt{biblist.bst-dist} (\texttt{itibst.doc} version 1.3).
+\item Revision 1.1, 1991/10/14:
+  Initial revision
+\end{itemize}
+
+\end{document}

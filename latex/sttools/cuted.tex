@@ -1,0 +1,91 @@
+\documentclass[DIV=8, pagesize=auto]{scrartcl}
+
+\usepackage{fixltx2e}
+\usepackage{etex}
+\usepackage{xspace}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage[utf8]{inputenc}
+\usepackage{microtype}
+\usepackage[unicode=true]{hyperref}
+
+\newcommand*{\mail}[1]{\href{mailto:#1}{\texttt{#1}}}
+\newcommand*{\pkg}[1]{\textsf{#1}}
+\newcommand*{\cs}[1]{\texttt{\textbackslash#1}}
+\makeatletter
+\newcommand*{\cmd}[1]{\cs{\expandafter\@gobble\string#1}}
+\makeatother
+\newcommand*{\env}[1]{\texttt{#1}}
+\newcommand*{\opt}[1]{\texttt{#1}}
+\newcommand*{\meta}[1]{\textlangle\textsl{#1}\textrangle}
+\newcommand*{\marg}[1]{\texttt{\{}\meta{#1}\texttt{\}}}
+
+\addtokomafont{title}{\rmfamily}
+
+\title{The \pkg{cuted} package}
+\author{Sigitas Tolušis\\\mail{sigitas@vtex.lt}\\\url{http://www.vtex.lt/tex/download/macros/}}
+\date{1997/10/01}
+
+
+\begin{document}
+
+\maketitle
+
+\section{Purpose:}
+
+Insert some onecolumn material in full-width on double-column page.
+
+
+\section{Short Description:}
+
+It is denoted to place some material in full-width at any place 
+on double-column page (\cmd{\twocolumn} mode). The part of material
+can be placed on the next page. Existing text is placed
+under inserted material in two columns (it is reformatted).
+
+Provides new environment:
+\verb+\begin{strip}+\meta{\ldots}\verb+\end{strip}+\\
+Puts \cmd{\vbox}\marg{\ldots} in full-width on double-column page.
+Adds \cmd{\stripsep} glue before and after
+(By default \verb+\stripsep=15pt plus2pt minus 2pt+).
+It can be problems with floats and footnotes. In the case of 
+problems with footnotes it is possible to correct the situation
+using commands \cmd{\footnotemark} and \cmd{\footnotetext}.
+
+Provides new command:
+\cmd{\oldcolsbreak}\marg{\#1}\\
+Adds \meta{\#1} in place of original column break if strip is placed 
+on the right column.
+
+
+\section{List of Changes}
+
+\begin{tabular}{@{}l@{ -- }l@{}}
+  1997/09/02 & improved column balancing                        \\
+  1997/09/03 & float control for \cmd{\@colroom} setting        \\
+  1997/09/04 & improved \cmd{\@colroom} setting                 \\
+  1997/09/05 & checking for \cmd{\@viper} and \cmd{\hold@viper} \\
+  1997/09/09 & compatibility with \pkg{flushend.sty}            \\
+  1997/09/22 & improved \cmd{\output} ir \cmd{\@specialoutput}  \\
+  1997/10/01 & improved \cmd{\output} ir \cmd{\@addviper}
+\end{tabular}
+
+\bigskip
+
+\footnotesize
+\noindent
+\pkg{cuted.sty}\\
+Copyright 1997 Sigitas Tolušis\\
+V\TeX\ Ltd., Akademijos 4, Vilnius, Lithuania\\
+e-mail \mail{sigitas@vtex.lt}\\
+\url{http://www.vtex.lt/tex/download/macros/}
+
+This program can redistributed and/or modified under the terms
+of the \LaTeX\ Project Public License Distributed from CTAN
+archives in directory \texttt{macros/latex/base/lppl.txt}; either
+version~1 of the License, or (at your option) any later version.
+
+\end{document}
+
+

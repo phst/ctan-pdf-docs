@@ -1,0 +1,89 @@
+\documentclass[pagesize=auto, fontsize=12pt, DIV=11]{scrartcl}
+
+\usepackage{fixltx2e}
+\usepackage{etex}
+\usepackage{xspace}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{microtype}
+\usepackage{hyperref}
+
+\newcommand*{\mail}[1]{\href{mailto:#1}{\texttt{#1}}}
+\newcommand*{\pkg}[1]{\textsf{#1}}
+\newcommand*{\cs}[1]{\texttt{\textbackslash#1}}
+\makeatletter
+\newcommand*{\cmd}[1]{\cs{\expandafter\@gobble\string#1}}
+\makeatother
+\newcommand*{\meta}[1]{\textlangle\textsl{#1}\textrangle}
+\newcommand*{\marg}[1]{\texttt{\{}\meta{#1}\texttt{\}}}
+
+\addtokomafont{title}{\rmfamily}
+
+\title{The \pkg{needspace} package\thanks{This manual corresponds to \pkg{needspace}~v1.3b, dated~2009/09/03.}}
+\author{Author: Peter Wilson, Herries Press\\Maintainer: Will Robertson\thanks{\mail{will.robertson@latex-project.org}}}
+\date{2009/09/03}
+
+
+\begin{document}
+
+\maketitle
+
+\noindent
+Provides commands to reserve space at the bottom of a page. If there
+is not enough space on the current page (column) a new page (column)
+is started.
+
+\begin{quote}
+  \small
+  Copyright 1996--2003 Peter Wilson\\
+  Released under the \LaTeX\ Project Public License
+\end{quote}
+
+
+\section{Example uses:}
+
+\begin{verbatim}
+... previous text.\par
+\needspace{5\baselineskip} % need next 5 lines on a single page/column
+The next five lines ...
+
+\Needspace*{4\baselineskip} % need 4 lines kept on same page
+   The major principles are:
+\begin{itemize}
+\item ...
+\end{verbatim}
+
+The \cmd{\needspace} macro reserves an \emph{approximate} amount of space (depending
+on what penalties are in effect) but is efficient and normally adequate.
+A short page will be ragged bottom even if \cmd{\flushbottom} is in
+effect.
+
+\cmd{\Needspace} is less efficient but reserves the requested space. It
+should only be used between paragraphs. Short pages produced by 
+\cmd{\Needspace}\marg{length} will be ragged bottom but short pages produced by 
+\cmd{\Needspace*}\marg{length} will be flush bottom if \cmd{\flushbottom} is in effect.
+
+
+\section{Changes:}
+
+\begin{description}
+\item[Changes v1.3b (2009/09/03)]
+  New maintainer (Will Robertson)
+  
+\item[Changes v1.3a (2003/02/18)]
+  At the suggestion of Donald Arseneau (private emails) changed guts of
+  \cmd{\needspace} from 
+  \ldots\verb+\vskip\z@\@plus\dimen@\pagebreak[3]+\allowbreak
+  \verb+\vskip\z@\@plus-\dimen@\endgroup}+
+
+\item[Changes v1.3 (2003/02/07)]
+  Added \cmd{\Needspace} (an extended version of postings by Donald Arseneau 
+  to \texttt{comp.text.tex} e.\,g.,\ in November 1993, August 1995, September 1997, \ldots)
+  
+\item[Changes v1.2 (2002/09/11)]
+  At the suggestion of Robin Fairbairns, added use of \cmd{\dimen@} to capture 
+  the argument so that \pkg{calc} package commands can be used in the argument.
+\end{description}
+
+\end{document}

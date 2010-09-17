@@ -1,0 +1,107 @@
+\documentclass[DIV=8, parskip=half, pagesize=auto]{scrartcl}
+
+\usepackage{fixltx2e}
+\usepackage{etex}
+\usepackage{xspace}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage[svgnames]{xcolor}
+\usepackage{array}
+\usepackage{microtype}
+\usepackage{hyperref}
+
+\newcommand*{\angleurl}[1]{\href{#1}{\texttt{<#1>}}}
+\newcommand*{\pkg}[1]{\textsf{#1}}
+\newcommand*{\cs}[1]{\texttt{\textbackslash#1}}
+\makeatletter
+\newcommand*{\cmd}[1]{\cs{\expandafter\@gobble\string#1}}
+\makeatother
+\newcommand*{\meta}[1]{\textlangle\textsl{#1}\textrangle}
+\newcommand*{\marg}[1]{\texttt{\{}\meta{#1}\texttt{\}}}
+
+\addtokomafont{title}{\rmfamily}
+
+\title{The \pkg{ifmtarg} package\thanks{This manual corresponds to \pkg{ifmtarg}~v1.2a, dated~2009/09/02.}}
+\author{Author: Peter Wilson, Herries Press\\Maintainer: Will Robertson\thanks{will dot robertson at latex-project dot org}}
+\date{2009/09/02}
+
+
+\begin{document}
+
+\maketitle
+
+Provides an if--then--else command for an empty macro argument
+(empty = zero or more spaces only)
+Use as \cmd{\@ifmtarg}\marg{arg1}\marg{Code for arg1 empty}\marg{Code for arg1 not empty}
+
+The \cmd{\@ifmtarg} command takes 3~arguments and \cmd{\@ifnotmtarg} takes 2~arguments.
+\cmd{\@ifnotmtarg} is slightly more efficient when code is only required
+for a non-empty argument.
+
+Example usages:
+%
+\begin{verbatim}
+\newcommand{\isempty}{1]{%
+  \@ifmtarg{#1}{\typeout{YES}}{\typeout{NO}}}
+\end{verbatim}
+%
+\begin{tabular}{@{}>{\color{SeaGreen}}l@{$\quad\to\quad$}>{\ttfamily}l@{}}
+  \verb+\isempty{}+    & YES \\
+  \verb+\isempty{   }+ & YES \\
+  \verb+\isempty{E}+   & NO  \\
+  \verb+\isempty{ E }+ & NO
+\end{tabular}
+%
+\begin{verbatim}
+\newcommand{\isnotempty}[1]{%
+   \@ifnotmtarg{#1}{\typeout{YES}}}
+\end{verbatim}
+%
+\begin{tabular}{@{}>{\color{SeaGreen}}l@{$\quad\to\quad$}>{\ttfamily}l@{}}
+  \verb+\isnotempty{}+    &     \\
+  \verb+\isnotempty{   }+ &     \\
+  \verb+\isnotempty{E}+   & YES \\
+  \verb+\isnotempty{ E }+ & YES
+\end{tabular}
+
+In an Email to me on 13 March 2000, Donald Arseneau pointed out some
+failings with my original definition of the \cmd{\@ifmtarg} command:
+%
+\begin{verbatim}
+\newcommand{\@ifmtarg}[3]{%
+  \edef\@mtarg{\zap@space#1 \@empty}%  
+  \ifx\@empty\@mtarg\relax #2\else #3\fi}
+\end{verbatim}
+%
+It works most of the time correctly but Donald showed that it can 
+give unexpected results 
+under conditions that I had not thought of. He suggested the coding 
+that now appears in the package above for the \cmd{\@ifmtarg} and 
+\cmd{\@ifnotmtarg} commands. For a discussion on detecting empty arguments 
+see \href{http://www.ctan.org/pub/tex-archive/info/aro-bend/answer.002}{\texttt{CTAN/info/aro-bend/answer.002}}
+
+
+\minisec{Change History}
+
+\begin{labeling}[\hspace{\labelsep}--]{v1.2a}
+\item[v1.2a] New maintainer (Will Robertson)
+\end{labeling}
+
+\bigskip
+
+\begin{quote}
+  \footnotesize
+  Copyright Peter Wilson, 1996 \\
+  Copyright Peter Wilson and Donald Arseneau, 2000
+  
+  This work may be distributed and/or modified under the
+  conditions of the \LaTeX\ Project Public License, either
+  version~1.3c of this license or (at your option) any 
+  later version: \angleurl{http://www.latex-project.org/lppl.txt}
+  
+  This work has the LPPL maintenance status ``maintained''.
+  The Current Maintainer of this work is Will Robertson.
+\end{quote}
+
+\end{document}

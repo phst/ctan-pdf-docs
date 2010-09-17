@@ -1,0 +1,33 @@
+\documentclass[pagesize=auto, fontsize=14pt, parskip=full, DIV=10]{scrartcl}
+
+\usepackage{fixltx2e}
+\usepackage{etex}
+\usepackage{xspace}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{microtype}
+\usepackage{hyperref}
+
+\newcommand*{\pkg}[1]{\textsf{#1}}
+\newcommand*{\opt}[1]{\texttt{#1}}
+
+\addtokomafont{title}{\rmfamily}
+
+\title{The \pkg{overcite} package\thanks{This manual corresponds to \pkg{overcite}~v4.0, dated~2003/05/27.}}
+\subtitle{Compressed, sorted lists\\of superscript numerical citations}
+\author{Donald Arseneau}
+\date{2003/05/27}
+
+
+\begin{document}
+
+\maketitle
+
+This package is provided for compatibility with the original 
+\pkg{overcite.sty}.  All it does is invoke \pkg{cite.sty} with the option
+\opt{[superscript]}.
+
+It would be a shame to lose this pun.
+
+\end{document}

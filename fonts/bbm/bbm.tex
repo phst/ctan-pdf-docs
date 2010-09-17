@@ -1,0 +1,86 @@
+\documentclass[DIV=9, pagesize=auto]{scrartcl}
+
+\usepackage{fixltx2e}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{microtype}
+\usepackage{hyperref}
+
+\newcommand*{\twoepsilon}{2$_{\textstyle\varepsilon}$}
+
+\addtokomafont{title}{\rmfamily}
+
+\title{The \textsf{bbm} package}
+\author{Gilles F. Robert \\ \href{mailto:gfrobert@umpa.ens-lyon.fr}{gfrobert@umpa.ens-lyon.fr}}
+\date{1999/03/15}
+
+
+\begin{document}
+
+\maketitle
+
+\noindent
+A mathematician often needs special symbols to designate sets such as the
+integers, the reals etc..
+
+For the time being, the only fonts providing these special symbols have been:
+%
+\begin{itemize}
+\item the AMS fonts \textsf{msbm} (older version \textsf{msym}), which are intended for use with
+  Times and aren't truly what a mathematician expects (the stress is on both
+  stems instead of being on only the left one).
+\item Alan Jeffrey's \textsf{bbold} fonts, which are sans-serif ones, with (almost) no
+  possibility of design variations for, say, a bold variant.
+\end{itemize}
+%
+That was all, and in particular nothing for use with Computer Modern.
+
+I was already working at that time on the project of changing the codes of
+\texttt{romanu.mf}, \texttt{romanl.mf} and other files to add a `Blackboard' variant to
+Computer Modern.
+
+\begin{center}
+  YOU HAVE IT ALL THERE !!!  
+\end{center}
+%
+The whole package contains five `main' files:
+%
+\begin{itemize}
+\item \texttt{blbbase.mf} (the `base') contains the supplementary definitions needed
+  for double stems etc..
+\item \texttt{blbord.mf} (the `driver') is fairly simple and only makes the necessary
+  calls.
+\item \texttt{blbordu.mf} (based on \texttt{romanu.mf}): programs for uppercase letters.
+\item \texttt{blbordl.mf} (based on \texttt{romanl.mf}): programs for lowercase letters.
+\item \texttt{blbordsp.mf} (based on \texttt{romand.mf} and \texttt{punct.mf}): programs for the digits~1
+and~2 and for parentheses and brackets.
+\end{itemize}
+%
+There is also a whole lot of parameter files that are (almost) the same as
+those provided by DEK.
+
+For most of them, the only differences are
+%
+\begin{itemize}
+\item change `\verb+cmbase+' for `\verb+blbbase+' on line~2
+\item change `\verb+generate roman+' for `\verb+generate blbord+' on last line
+\item add two extra parameters (\verb+interspace#+ and \verb+cap_interspace#+).
+\end{itemize}
+
+A \LaTeX(\twoepsilon) package written by Torsten Hilbrich for using these fonts is also 
+available nearby, exactly in \href{http://mirror.ctan.org/macros/latex/contrib/supported/bbm/}{ctan/macros/latex/contrib/supported/bbm/}
+
+I sincerely hope you'll enjoy using these fonts; if you get into problems
+while using them, I should be reachable at
+%
+\begin{quote}
+  Gilles F. ROBERT\\
+  Unit\'e de Math\'ematiques Pures et Appliqu\'ees\\
+  \'Ecole Normale Sup\'erieure\\
+  46, All\'ee d'Italie\\
+  69364 Lyon Cedex (FRANCE)\\
+  \medskip
+  e-mail~: \href{mailto:gfrobert@umpa.ens-lyon.fr}{gfrobert@umpa.ens-lyon.fr}
+\end{quote}
+
+\end{document}
