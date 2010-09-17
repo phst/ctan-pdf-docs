@@ -1,0 +1,370 @@
+\documentclass[pagesize=auto, parskip=half, fontsize=12pt, DIV=13]{scrartcl}
+
+\usepackage{fixltx2e}
+\usepackage{etex}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage[svgnames]{xcolor}
+\usepackage{hologo}
+\usepackage{listings}
+\usepackage{microtype}
+\usepackage[breaklinks=true]{hyperref}
+
+\newcommand*{\mail}[1]{\href{mailto:#1}{\texttt{#1}}}
+\newcommand*{\bmail}[1]{\href{mailto:#1}{\texttt{<#1>}}}
+\newcommand*{\pkg}[1]{\textsf{#1}}
+\newcommand*{\cs}[1]{\texttt{\textbackslash#1}}
+\makeatletter
+\newcommand*{\cmd}[1]{\cs{\expandafter\@gobble\string#1}}
+\makeatother
+\newcommand*{\opt}[1]{\texttt{#1}}
+
+\renewcommand*{\thesection}{\Alph{section}}
+
+\addtokomafont{title}{\rmfamily}
+
+\lstset{%
+  language=[LaTeX]TeX,%
+  columns=flexible,%
+  upquote=true,%
+  numbers=left,%
+  basicstyle=\ttfamily,%
+  keywordstyle=\color{Navy},%
+  commentstyle=\color{DimGray},%
+  stringstyle=\color{SeaGreen},%
+  numberstyle=\scriptsize\color{SlateGray}%
+}
+
+\title{The \pkg{pax} package\thanks{This manual corresponds to \pkg{pax.sty}~v0.1h, dated~2007/07/19}}
+\author{Heiko Oberdiek\thanks{oberdiek@uni-freiburg.de}}
+\date{2007/07/19}
+
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\section{Project \pkg{pax}}
+
+If PDF files are included using \hologo{pdfTeX}\@, PDF annotations
+are stripped. This project tries a solution without
+altering \hologo{pdfTeX}\@. A Java program (\texttt{pax.jar}) parses the PDF file that
+will later be included. It writes the data of the annotations
+in a file that can be read by \TeX\@. Then a \LaTeX\ package (\pkg{pax.sty})
+extends the graphics package. If a PDF file is included, the package
+looks for the file with the annotation data, reads them and puts
+the annotations in the right place.
+
+Project status: experimental
+
+
+\section{Copyright, License}
+
+Copyright~\textcopyright\ 2006--2008 Heiko Oberdiek.
+
+The project consists of two parts:
+%
+\begin{itemize}
+\item
+  The Java program \texttt{pax.jar} with sources. \\
+  The Perl wrapper \texttt{pdfannotextractor.pl}. \\
+  License is GPL, see \texttt{license/gpl.txt}.
+\item
+  The \LaTeX\ package \pkg{pax.sty}.
+  License is LPPL~1.3.
+\end{itemize}
+%
+The file \texttt{README} belongs to both parts.
+
+The Java program uses the PDF library PDFBox,
+see \url{http://www.pdfbox.org/}.
+
+
+\section{Files}
+
+The project is available in CTAN (\href{ftp://ftp.ctan.org/}{\texttt{ftp.ctan.org}}): \\
+\href{http://ctan.org/macros/latex/contrib/pax/}{\texttt{CTAN:macros/latex/contrib/pax/}}
+
+There are the following files:
+%
+\begin{itemize}
+\item
+  \texttt{README} \\
+  \null\quad This file.
+\item
+  \texttt{pax-tds.zip} \\
+  \null\quad The whole project, ready to unpack in a TDS (\texttt{texmf}) tree.
+\end{itemize}
+
+The files inside pax-tds.zip:
+%
+\begin{itemize}
+\item
+  \texttt{doc/latex/pax/README} \\
+  \null\quad This file.
+\item
+  \texttt{scripts/pax/pax.jar} \\
+  \null\quad The Java program.
+\item
+  \texttt{scripts/pax/pdfannotextractor.pl} \\
+  \null\quad Perl wrapper for calling the Java program in \texttt{pax.jar}.
+\item
+  \texttt{source/latex/pax/license/LaTeX/lppl.txt} \\
+  \null\quad License (LPPL) for the \LaTeX\ package.
+\item
+  \texttt{source/latex/pax/license/PDFAnnotExtractor/gpl.txt} \\
+  \null\quad License (GPL) for the Java program.
+\item
+  \begingroup
+  \ttfamily
+  source/latex/pax/src/Constants.java \\
+  source/latex/pax/src/Entry.java \\
+  source/latex/pax/src/EntryWriteException.java \\
+  source/latex/pax/src/PDFAnnotExtractor.java \\
+  source/latex/pax/src/StringVisitor.java
+  \endgroup \\
+  \null\quad Java source files.
+\item
+  \texttt{source/latex/pax/src/MANIFEST.MF} \\
+  \null\quad Manifest file for the JAR file.
+\item
+  \texttt{source/latex/pax/src/build.xml} \\
+  \null\quad Ant build file for generating the JAR file.
+\item
+  \texttt{tex/latex/pax/pax.sty} \\
+  \null\quad The \LaTeX\ package.
+\end{itemize}
+
+
+\section{Author}
+
+Heiko Oberdiek \bmail{oberdiek@uni-freiburg.de}
+
+
+\section{Requirements}
+
+\begin{itemize}
+\item Java 1.4+.
+\item PDFBox 0.7.2+.
+
+\item The Perl wrapper (optional) needs:
+  \begin{itemize}
+  \item Perl
+  \item \texttt{kpsewhich}
+  \item \texttt{java} in \texttt{PATH}
+  \end{itemize}
+
+\item The option \opt{-{}-install} also requires:
+  \begin{itemize}
+  \item \texttt{wget} or \texttt{curl}
+  \item \texttt{unzip}
+  \item \texttt{texhash} or \texttt{mktexlsr}
+  \end{itemize}
+\end{itemize}
+
+
+\section{Download}
+
+\renewcommand*{\labelenumi}{\arabic{enumi}.}
+\renewcommand*{\labelenumii}{\alph{enumii})}
+\renewcommand*{\theenumi}{\labelenumi}
+\renewcommand*{\theenumii}{\labelenumii}
+
+\begin{enumerate}
+\item \label{item:1}
+  Download \texttt{pax-tds.zip} from CTAN: \\
+  \url{ftp://ftp.ctan.org/tex-archive/macros/latex/contrib/pax/pax-tds.zip}
+
+\item \label{item:2}
+  Download \texttt{PDFBox-0.7.3.jar} from \url{http://www.pdfbox.org/} (22~MB) \\
+  \url{http://prdownloads.sourceforge.net/pdfbox/PDFBox-0.7.3.zip?download} \\
+  Or install PDFBox as RPM package or whatever.
+\end{enumerate}
+
+
+\section{Installation}
+
+Examples are given for linux.
+
+\begin{enumerate}
+\setcounter{enumi}{2}
+\item \label{item:3}
+  Install PDFBox (from its home page, RPM package, \dots). \\
+  The wrapper \texttt{pdfannotextractor.pl} looks for the JAR file in directories: \\
+  \begingroup
+  \ttfamily
+  \null\quad /usr/share/java/ \\
+  \null\quad /usr/local/share/java/ \\
+  \null\quad TDS:scripts/pax/lib/ (TDS:scripts//) \\
+  \endgroup
+  assuming one of the following names: \\
+  \begingroup
+  \ttfamily
+  \null\quad pdfbox.jar \\
+  \null\quad PDFBox.jar \\
+  \null\quad pdfbox-0.7.3.jar \\
+  \null\quad PDFBox-0.7.3.jar \\
+  \null\quad pdfbox-0.7.2.jar \\
+  \null\quad PDFBox-0.7.2.jar
+  \endgroup
+\end{enumerate}
+
+\minisec{Alternative for \ref{item:2} and \ref{item:3}}
+
+\begin{itemize}
+\item Continue with \ref{item:4} and \ref{item:5a}.
+\item Call `\verb+pdfannotextractor --install+' (or with option \opt{-{}-debug}). \\
+  It downloads PDFBox from its homepage and installs it
+  in \texttt{TEXMFVAR(VARTEXMF)} below \texttt{TDS:scripts/pax/}
+\end{itemize}
+
+\begin{enumerate}
+\setcounter{enumi}{3}
+\item \label{item:4}
+  Unzip \texttt{pax-tds.zip} inside the TDS tree, where you want to put this
+   project, e.\,g.:
+\begin{verbatim}
+  unzip pax-tds -d /usr/local/share/texmf
+\end{verbatim}
+   Don't forget to update the database (\texttt{texhash}, \texttt{mktexlsr}, \dots).
+
+ \item \label{item:5}
+   \begin{enumerate}
+   \item \label{item:5a}
+     Install the wrapper Perl script \texttt{pdfannotextractor.pl}
+     as `\texttt{pdfannotextractor'} somewhere in your \texttt{PATH} (\texttt{/usr/local/bin},
+     \texttt{/usr/bin}, \dots).
+   \item \label{item:5b}
+     Or write a wrapper script or whatever to ease the call of the
+     Java program, e.\,g.:
+\begin{verbatim}
+  #!/bin/sh
+  java -cp pax.jar:pdfbox.jar pax.PDFAnnotExtractor "$@"
+\end{verbatim}
+   \end{enumerate}
+\end{enumerate}
+
+
+\subsection{Version of PDFBox}
+
+Developing the \pkg{pax} project I have used and tested version~0.7.2,
+also the current version~0.7.3 seems to be fine. Older versions
+are not supported at all, they may work or do not.
+
+
+\section{Use}
+
+As example I am using \texttt{usrguide.pdf} (with links from project \texttt{latex-tds})
+that will be included in \texttt{test.tex}:
+%
+\begin{lstlisting}
+%%% cut %%% test.tex %%% cut %%%
+\documentclass[a4paper,12pt,landscape]{article}
+\usepackage[
+  hmargin=1in,
+  vmargin=1in,
+]{geometry}
+
+\usepackage{pdfpages}
+% pdfpages loads graphicx
+
+\usepackage{pax}
+
+\iffalse
+  \usepackage{hyperref}
+  \hypersetup{
+    filebordercolor={1 1 0},
+  }
+\fi
+
+\begin{document}
+  \includepdf[pages=-,nup=2x1]{usrguide}
+\end{document}
+%%% cut %%% test.tex %%% cut %%%
+\end{lstlisting}
+
+First run the Java program on \texttt{usrguide.pdf}:
+%
+\begin{verbatim}
+  $ java -jar pax.jar usrguide.pdf
+\end{verbatim}
+%
+It generates \texttt{usrguide.pax}.
+Next run \texttt{pdflatex} on \texttt{test.tex} twice at least:
+%
+\begin{verbatim}
+  $ pdflatex test
+  $ pdflatex test
+\end{verbatim}
+%
+Then the links should work.
+
+Additionally package \pkg{hyperref} can be used (replace \verb+\iffase+ by \verb+\iftrue+).
+Then the links can be configured using \pkg{hyperref} settings.
+(But keep in mind, the colored links by option \opt{colorlinks} can't
+be changed in included documents.
+
+
+\section{History}
+
+2006/08/24 v0.1a
+%
+\begin{itemize}
+\item First release.
+\end{itemize}
+
+2006/09/04 v0.1b
+%
+\begin{itemize}
+\item Bug fix in \verb+PDFAnnotExtractor.add_dest()+/named destinations.
+\end{itemize}
+
+2007/06/29 v0.1c
+%
+\begin{itemize}
+\item \cmd{\l@addto@macro} renamed to \cmd{\PAX@l@addto@macro} to avoid
+  collision with classes of \KOMAScript.
+\end{itemize}
+
+2007/06/30 v0.1d
+%
+\begin{itemize}
+\item Use of package `\pkg{etexmcds}'.
+\end{itemize}
+
+2007/07/12 v0.1e
+%
+\begin{itemize}
+\item The Java program can be called with several files.
+\end{itemize}
+
+2007/07/16 v0.1f
+%
+\begin{itemize}
+\item PDF files are explicitely closed to avoid warnings.
+\end{itemize}
+
+2007/07/18 v0.1g
+%
+\begin{itemize}
+\item Compiled for Java~1.4.
+\end{itemize}
+
+2007/07/19 v0.1h
+%
+\begin{itemize}
+\item JAR file without TDS tree.
+\end{itemize}
+
+2008/10/01 v0.1i
+%
+\begin{itemize}
+\item Perl wrapper `\texttt{pdfannotextractor.pl}' added.
+\item Section `Installation' from \texttt{README} rewritten.
+\item Class-Path removed from \texttt{MANIFEST.MF}.
+\end{itemize}
+
+\end{document}
