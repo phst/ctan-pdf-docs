@@ -1,0 +1,100 @@
+\documentclass[pagesize=auto, fontsize=12pt, DIV=10, parskip=half]{scrartcl}
+
+\usepackage{fixltx2e}
+\usepackage{etex}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{hologo}
+\usepackage{microtype}
+\usepackage{hyperref}
+
+\newcommand*{\mail}[1]{\href{mailto:#1}{\texttt{#1}}}
+\newcommand*{\pkg}[1]{\textsf{#1}}
+\newcommand*{\cs}[1]{\texttt{\textbackslash#1}}
+\makeatletter
+\newcommand*{\cmd}[1]{\cs{\expandafter\@gobble\string#1}}
+\makeatother
+\newcommand*{\opt}[1]{\texttt{#1}}
+
+\addtokomafont{title}{\rmfamily}
+
+\title{The \pkg{pinyin} package\thanks{This manual corresponds to \pkg{pinyin.sty}~v4.8.2, dated~29-Dec-2008.}}
+\author{Werner Lemberg\thanks{\mail{wl@gnu.org}}}
+\date{29-Dec-2008}
+
+
+\begin{document}
+
+\maketitle
+
+This style file (which can be also used under \hologo{plainTeX}) enables the input
+of pinyin syllables with tones.
+
+Say
+%
+\begin{verbatim}
+    \usepackage{pinyin}
+\end{verbatim}
+%
+to load all pinyin macros under \hologo{LaTeX2e}; say
+%
+\begin{verbatim}
+\input pinyin.sty
+\end{verbatim}
+%
+under \hologo{plainTeX}.
+
+An example explains best how to input pinyin:
+%
+\begin{verbatim}
+    \Wo3 \hen3 \xi3\huan1 \chi1 \Zhong1\guo2 \cai4.
+\end{verbatim}
+%
+Note there is no fifth tone marker in pinyin (Zhuyinfuhao uses a dot to
+indicate the fifth tone; on the other hand no marker is used for the first
+tone). Nevertheless you can say e.\,g.\@, \verb+\ne5+ to get the syllable `ne' without a
+tone.
+
+There are some special cases: 
+
+\begin{itemize}
+\item
+  use `v' instead of `u umlaut' in pinyin syllables (these are \cmd{\lv},
+  \cmd{\lve}, \cmd{\nv}, \cmd{\nve} and its uppercase forms). Example:
+  % 
+\begin{verbatim}
+    \nv3'\er2       daughter
+\end{verbatim}
+  % 
+  The appearance of u umlaut with additional tone markers has been
+  tested with the standard \textsc{cm}, \textsc{ec}, and PostScript fonts.
+
+\item use \cmd{\Long} and \cmd{\LONG} instead of \cmd{\long} and \cmd{\Long} (which you would
+  expect): \cmd{\long} is a very important internal \hologo{TeX} command. Many
+  packages would fail if we redefined \cmd{\long}.
+\end{itemize}
+
+
+\minisec{Problems:}
+
+The following macros are redefined if you load pinyin.sty:
+%
+\begin{verbatim}
+  \a, \chi, \cong, \ding, \ge, \hang, \le, \min, \mu, \ne, \ni, \nu,
+  \o, \O, \pi, \Pi, \Re, \tan, \xi, \Xi.
+\end{verbatim}
+%
+They are available as \cmd{\PY...} (\cmd{\PYchi}, \cmd{\PYcong}, etc.).
+
+If this is not enough, you can say \cmd{\PYdeactivate} to restore the original
+definitions (and reactivate these syllables with \cmd{\PYactivate}).
+
+In case you use the \pkg{hyperref} package earlier than version~6.75a
+(2006-Feb-12) together with the `\opt{hpdftex}' driver you should load
+\pkg{pinyin.sty} \emph{after} \pkg{hyperref.sty} (contrary to what the \pkg{hyperref} manual
+says). Reason is that \cmd{\ding} is defined in \pkg{pifont.sty} which is
+automatically loaded by \pkg{hpdftex.def} -- the latest \pkg{hyperref} version no
+longer uses \pkg{pifont.sty}.
+
+\end{document}

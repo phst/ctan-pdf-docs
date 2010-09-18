@@ -13,3 +13,4 @@ mcite
 mff
 newvbtm
 ntabbing
+pictex
