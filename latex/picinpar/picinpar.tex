@@ -1,0 +1,89 @@
+\documentclass[pagesize=auto, fontsize=14pt, DIV=12, parskip=half]{scrartcl}
+
+\usepackage{fixltx2e}
+\usepackage{etex}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{microtype}
+\usepackage{hyperref}
+
+\newcommand*{\mail}[1]{\href{mailto:#1}{\texttt{#1}}}
+\newcommand*{\pkg}[1]{\textsf{#1}}
+\newcommand*{\cs}[1]{\texttt{\textbackslash#1}}
+\makeatletter
+\newcommand*{\cmd}[1]{\cs{\expandafter\@gobble\string#1}}
+\makeatother
+\newcommand*{\env}[1]{\texttt{#1}}
+
+\addtokomafont{title}{\rmfamily}
+\deffootnote{0.5em}{1em}{\textsuperscript{\thefootnotemark}}
+
+\title{The \pkg{picinpar} package\thanks{This manual corresponds to \pkg{picinpar.sty}~v1.2a, dated~July~13, 1993.}}
+\subtitle{Macros for making windows with \LaTeX}
+\author{Friedhelm Sowa\thanks{Heinrich-Heine-University D\"usseldorf, Computing Center\newline\mail{sowa@uni-duesseldorf.de}}}
+\date{July 13, 1993}
+
+
+\begin{document}
+
+\maketitle
+
+Distributed under the terms of the GNU General Public License.
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License as
+published by the Free Software Foundation; either version~2, or (at your
+option) any later version.
+
+Incorporated are basic ideas of Alan Hoenig (Thanks Alan!)
+Thanks to Phil Taylor, who gave some useful hints during his
+tutorial at the EURO~\TeX~92 in Prague.
+
+Also thanks to Ulrik Vieth, who incorporated the macros for
+generating captions within the windows.
+
+
+\minisec{Known problems:}
+
+\begin{itemize}
+\item
+  Don't use \cmd{\samepage}
+
+\item
+  Use \cmd{\footnotemark} within and \cmd{\footnotetext} outside the
+  \env{window}-environment instead of \cmd{\footnote}
+
+\item
+  When using the \pkg{epic}-package load \pkg{picinpar} before \pkg{epic}
+  like
+\begin{verbatim}
+\documentstyle[...,picinpar,epic]{...}
+\end{verbatim}
+\end{itemize}
+
+
+\minisec{Changes:}
+
+\begin{labeling}{1.2a}
+\item[1.1]
+  If \verb+\brokenpenalty\maxdimen+ then it's set to 9999 within the
+  window's group
+
+  Reported by kuhlmav@elec.canterbury.ac.nz
+
+\item[1.2]
+  When centering a window and the right column contains less
+  lines than the left column then the right lines are raised
+  by using \cmd{\vfill}
+
+  Reported by Wolfgang Riedel, TU Chemnitz
+
+\item[1.2a]
+  A better way to shift the right box. There was some trouble
+  when the window is on the left. I don't know why I didn't
+  notice \TeX's overfull \cmd{\vbox}
+
+  Reported by Stephan Seidl, \mail{seidl@rcs.urz.tu-dresden.de}
+\end{labeling}
+
+\end{document}

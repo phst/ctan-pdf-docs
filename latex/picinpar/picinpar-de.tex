@@ -1,0 +1,285 @@
+%
+% By Friedhelm Sowa, Heinrich-Heine-University D\"usseldorf,
+%                    Computing Center
+%                    In case of emergency try to get the email adress
+%                    after having checked the input :-)
+%                    Okay, for those who are too lazy:
+%                          tex@ze8.rz.uni-duesseldorf.de
+%                          sowa@convex.rz.uni-duesseldorf.de
+%
+% Distributed under the terms of the GNU General Public License.
+% This program is free software; you can redistribute it and/or
+% modify it under the terms of the GNU General Public License as
+% published by the Free Software Foundation; either version 2, or (at your
+% option) any later version.
+%
+\documentstyle[german,picinpar]{article}
+\setlength{\parskip}{.66\baselineskip}
+\setlength{\parindent}{0pt}
+\begin{document}
+\section*{Beispiele zu {\tt picinpar.sty}}
+\font\yn=cmss17 scaled \magstep5 %oder sonst was gro"ses (yinit?)
+\begin{verbatim}
+\begin{window}[0,l,{\yn V},{}]
+or einigen Jahren wurde von ...
+... Abschnitts erfolgten automatisch.
+\end{window}
+\end{verbatim}
+
+\begin{window}[0,l,{\yn V},{}]
+or einigen Jahren wurde von Donald E.~Knuth im TUGboat ein kleines
+Problem mit der Bitte um L"osung vorgestellt. Es handelte sich darum,
+in einem Paragraphen ein Fenster zu erzeugen, in das man beliebigen Text
+oder eine Zeichnung hineinsetzen kann. Prompt kamen dann in den folgenden
+Ausgaben L"osungsvorschl"age: Einer von DEK pers"onlich, der andere von
+Alan Hoenig. Der letztgenannte brachte die elegantere L"osung, die keine
+manuellen Korrekturen mehr notwendig machte. Sein Makro verlangte lediglich
+in den Parametern Informationen "uber die Breite und H"ohe der
+freizulassenden Stelle im Paragraphen. Die Einz"uge und der Satz der
+Fragmente des Abschnitts erfolgten automatisch.
+\end{window}
+
+\begin{verbatim}
+\begin{figwindow}[2,r,{
+\unitlength1cm
+\begin{picture}(3,1.4)
+\put(0.7,0.7){\circle*{0.2}}     \put(0.7,0.7){\circle{1.2}}
+\put(0.7,0.7){\vector(0,1){0.6}} \put(2.5,0.7){\circle*{0.5}}
+\end{picture}
+},{Kreise und Pfeile}]
+Was leisten nun diese Macros ...
+... sieht hierbei wie folgt aus:
+\end{figwindow}
+\end{verbatim}
+
+\begin{figwindow}[2,r,{
+\unitlength1cm
+\begin{picture}(3,1.4)
+\put(0.7,0.7){\circle*{0.2}}     \put(0.7,0.7){\circle{1.2}}
+\put(0.7,0.7){\vector(0,1){0.6}} \put(2.5,0.7){\circle*{0.5}}
+\end{picture}
+},{Kreise und Pfeile}]
+Was leisten nun diese Macros? Einen kleinen Eindruck hat man schon
+zu Anfang dieses Artikels bekommen: der erste Buchstabe des Absatzes
+ist in einer anderen Schriftgr"o"se gedruckt und in den Absatz eingepa"st.
+Es mu"s aber nicht unbedingt Text sein, der so einger"uckt wird. Es kann
+ebenso eine \verb?picture?--Umgebung sein, die so in den Absatz eingef"ugt
+wird. Das rechts stehende Beispiel, das aus "'\LaTeX , Eine Einf"uhrung"'
+bekannt sein d"urfte, ist in einer \verb?minipage?--Umgebung gesetzt
+worden. Die Eingabe im Text sieht hierbei wie oben aus.
+\end{figwindow}
+
+\begin{verbatim}
+\begin{tabwindow}[1,r,{
+\begin{tabular}[t]{|r|l|r@{:}l|}
+\hline
+1&HSV&12&0\\
+...
+\end{tabular}
+},{Tabelle}]
+Auch der Satz von Tabellen in ...
+... w"urde sie etwas durchh"angen.
+
+Nachdem die Tastatur gequ"alt ...
+... noch die Nummerierung stimmt.
+\end{tabwindow}
+\end{verbatim}
+
+\begin{tabwindow}[1,r,{
+\begin{tabular}[t]{|r|l|r@{:}l|}
+\hline
+1&HSV&12&0\\
+\hline
+2&MSV&11&1\\
+\hline
+3&VfB&10&2\\
+\hline
+4&SVW&9&3\\
+\hline
+5&1.\ FCK&8&4\\
+\hline
+\end{tabular}
+},{Tabelle}]
+Auch der Satz von Tabellen in ein Fenster ist kein gro"ses Problem.
+Man nimmt einfach eine Tabelle, oder denkt sich auch eine aus.
+Dann wird daf"ur Sorge getragen, da"s sie auch mit der unteren
+Zeile ausgerichtet wird. Ansonsten w"urde sie etwas durchh"angen.
+
+Nachdem die Tastatur gequ"alt und das Hirn zermartert wurde kommt
+dann so etwas heraus, wie es hier rechts zu sehen ist. Sogar die
+Tabellenbezeichnung ist erschienen. Aber wirklich interessant wird's,
+wenn auch bei der n"achsten Tabelle noch die Nummerierung stimmt.
+\end{tabwindow}
+
+\begin{verbatim}
+\begin{tabwindow}[2,l,{
+\begin{tabular}[t]{|r|l|r@{:}l|}
+...
+\end{tabular}
+},{Tabelle}]
+Was wahnsinnig ...
+... sagt's denn?
+\end{tabwindow}
+\end{verbatim}
+
+\begin{tabwindow}[2,l,{
+\begin{tabular}[t]{|r|l|r@{:}l|}
+\hline
+1&HSV&12&0\\
+\hline
+2&MSV&11&1\\
+\hline
+3&VfB&10&2\\
+\hline
+4&SVW&9&3\\
+\hline
+5&1.\ FCK&8&4\\
+\hline
+\end{tabular}
+},{Tabelle}]
+Was wahnsinnig auflockernd wirkt, ist der st"andige Positionswechsel
+von Abbildungen auf einer Seite. Das Auge wird nicht m"ude bei
+der Erkundung der typographischen Vielfalt, die in gedruckten
+Werken enthalten ist. Aber man sollte sich nichtsdestotrotz doch
+auf die wesentlichen Mitteilungen konzentrieren, die mit derartigen
+Werken vermittelt werden sollen.
+
+Was sind aber nun die essentiellen Informationen? Naja, ein kleines
+{\tt l} und eine {\tt 2} bewirkt ein g"anzlich anderes Erscheinungsbild
+der Realit"at, wie sie mit den Augen eines Fu"sballfans der sechziger
+Jahre gesehen sein k"onnte. Bevor wir es vergessen: Da war doch noch
+die Unsicherheit wegen der Nummerierung von Tabellen. Na also, wer
+sagt's denn?
+\end{tabwindow}
+
+\begin{verbatim}
+\begin{tabwindow}[4,c,{
+\begin{tabular}[t]{|r|l|r@{:}l|r@{:}l|}
+...
+\end{tabular}
+},{Tabelle}]
+\sloppy
+Aber jetzt wird alles auf ...
+... genug der Beispiele.
+\end{tabwindow}
+\end{verbatim}
+
+\begin{tabwindow}[4,c,{
+\begin{tabular}[t]{|r|l|r@{:}l|r@{:}l|}
+\hline
+1&HSV&12&0&14&1\\
+\hline
+2&MSV&11&1&10&4\\
+\hline
+3&VfB&10&2&12&9\\
+\hline
+4&SVW&9&3&11&9\\
+\hline
+5&1.\ FCK&8&4&10&10\\
+\hline
+\end{tabular}
+},{Tabelle}]
+\sloppy
+Aber jetzt wird alles auf die Spitze getrieben. Oder vielmehr
+in die Mitte gesetzt. Ja doch, auch der zentrierte Satz einer Tabelle
+ist ebenfalls kein gro"ses Problem. Ein Problem ist jedoch, wie denn
+der Text gelesen werden soll. Erst die linke Spalte und dann die
+rechte oder einfach von links nach rechts? Oft kann man es nicht
+falsch machen. Das tr"ostet doch ungemein!
+
+Nun noch ein kleiner Hinweis in eigener Sache:
+Beim zentrierten Satz ist es schon besser, wenn der Abstand zwischen
+den Abschnitten auf $0pt$ gesetzt wird oder nur ein Paragraph verwendet
+wird. Der Grund? Die Abst"ande k"onnen unabh"angig vom Zeilenabstand
+sein und so ist ein optisch korrekter Satz der Spalten rechts und
+links vom Fenster etwas m"uhsam {\tt :-)}. Um nichts dem Zufall zu
+"uberlassen wird dies gleich von {\tt picinpar} erledigt.
+\end{tabwindow}
+
+Jetzt noch der Fall, bei dem eine Abbildung zentriert in den Text gesetzt
+werden soll, aber rechts und links so wenig Platz ($<=72pt$) bleibt,
+da"s dort die Probleme mit den Trennungen zu gro"s werden w"urden. Als
+Beispiel wird im Fenster die \TeX{}--Eingabe zu diesem Fall gezeigt. Um
+gleich etwaigen Problemen vorzubeugen, wird zun"achst wie folgt vorgegangen:
+
+{\parskip0pt\topsep0pt
+\begin{verbatim}
+\newbox\pppbox
+\setbox\pppbox=\vbox{\hsize=11cm
+\begin{verbatim}
+\begin{figwindow}[4,c,{\wframepic{ppp}
+},
+{Die Eingabe zu diesem Textteil!}]
+Diese Vorgehensweise ist wegen der Benutzung
+...
+dem Einsatz im Wege.
+\end{figwindow}
+\end{verbatim}
+\verb?\end{verbatim}?
+\begin{verbatim}
+}
+\end{verbatim}
+}
+\newbox\pppbox
+\setbox\pppbox=\vbox{\hsize=11cm
+\begin{verbatim}
+\begin{figwindow}[4,c,{\wframepic{ppp}
+},
+{Die Eingabe zu diesem Textteil!}]
+Diese Vorgehensweise ist wegen der Benutzung
+...
+dem Einsatz im Wege.
+\end{figwindow}
+\end{verbatim}
+}
+\begin{figwindow}[4,c,{\wframepic{ppp}},
+{Die Eingabe zu diesem Textteil!}]
+Diese Vorgehensweise ist wegen der Benutzung von {\tt figwindow} und
+der {\tt verbatim} dargestellten Eingabe notwendig. Aber ist ja auch egal.
+Wichtig ist einfach, da"s festgestellt wird, ob rechts und links vom
+zentrierten Bild noch genug Platz frei ist, um dort Text ohne gro"se
+Probleme zu setzen. Die Wahl von $72pt$ ist mehr oder weniger willk"urlich
+vorgenommen worden. Letztlich h"angt diese Grenze ja auch von der
+verwendeten Sprache ab. Falls also nicht genug Platz an den Seiten
+vorhanden ist, dann wird einfach nach dem Fenster mit dem Text fortgefahren.
+Noch mal schnell ein Blick auf die Nummerierung der Abbildungen...
+Ja, stimmt genau. Jetzt steht also dem Einsatz nichts im Wege.
+\end{figwindow}
+
+\begin{window}[3,r,{\arraycolsep=2.5pt \def\arraystretch{.75}
+$\left(\begin{array}{ccccccccc}%
+	 *&*&*&*&&&&&\\
+        **&*&*&*&*&&&&\\ \cline{3-6}
+	 *&*&\multicolumn{1}{|c}{*}&*&*&\multicolumn{1}{c|}{*}&&&\\
+	 &*&\multicolumn{1}{|c}{*}&*&*&\multicolumn{1}{c|}{*}&*&&\\
+	 &&\multicolumn{1}{|c}{*}&*&*&\multicolumn{1}{c|}{*}&*&*&\\ \cline{3-6}
+	 &&&*&*&*&*&*&*\\
+	 &&&&*&*&*&*&*\\
+	 &&&&&*&*&*&*\\
+	 &&&&&&*&*&*
+	 \end{array}
+   \right)$},{}]
+Doch halt! Es handelt sich hier ja um \TeX{}. Und das ist Grund genug, auch
+noch kurz auf mathematischen Formelsatz einzugehen. Sowohl im Fenster als
+auch im Text neben dem Fenster k"onnen Formeln erscheinen, deren Dimensionen
+beim Satz weitestgehend ber"ucksichtigt werden. Da ist also rechts ein
+{\tt array} und hier folgt eine Formel:
+
+\def\formel#1#2#3#4#5{#1(#4)-#1(#3)=
+\int_{#3}^{#4}\sum_{j=0}^{#5}#2(x_j)
+\prod_{{k=0}\atop{k\not= j}}^{#5}
+{x-x_k\over x_j-x_k}\; dx}
+$\formel Ffabn$
+
+Der zentrierte Satz von Formeln neben dem Text ist bisher mit
+{\tt picinpar.sty} nicht m"oglich, vielleicht kommt es aber eines
+Tages. Und "uberhaupt hat sich gerade der Mathematiksatz als gro"ses
+Problem bei der Entwicklung herausgestellt, da doch viel {\tt glue} in
+den {\tt boxes} verwendet wird. Aber es geht ja doch so halbwegs.
+\end{window}
+\vfill
+\centerline{Friedhelm Sowa, Heinrich--Heine--Universit"at D"usseldorf,
+Universit"atsrechenzentrum}
+\centerline{Email: sowa@convex.rz.uni-duesseldorf.de {\sl oder}
+tex@ze8.rz.uni-duesseldorf.de}
+\end{document}
