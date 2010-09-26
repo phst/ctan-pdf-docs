@@ -1,0 +1,38 @@
+\documentclass[pagesize=auto, fontsize=14pt, DIV=9, parskip=half]{scrartcl}
+
+\usepackage{fixltx2e}
+\usepackage{etex}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage[utf8]{inputenc}
+\usepackage{microtype}
+\usepackage{hyperref}
+
+\newcommand*{\mail}[1]{\href{mailto:#1}{\texttt{#1}}}
+\newcommand*{\pkg}[1]{\textsf{#1}}
+\newcommand*{\env}[1]{\texttt{#1}}
+
+\addtokomafont{title}{\rmfamily}
+
+\title{The \pkg{pst-exa} package\thanks{This manual corresponds to \pkg{pst-exa.sty}~v0.01, dated~2010/01/01.}}
+\author{Herbert Voß\thanks{\mail{hvoss@tug.org}}}
+\date{2010/01/01}
+
+
+\begin{document}
+
+\maketitle
+
+The package \pkg{pst-exa} was created to realize examples with printed code and output
+side by side or on top of each other. The package looks in the image directory for the source
+code of the examples and inserts only the code between the environment \env{document},
+which is the sequence \verb+\begin{document} ... \end{document}+.
+
+The package provides the environment \env{PSTexample} with the optional
+arguments. For more information read the documentation of \texttt{pst2pdf}.
+
+Using \pkg{pst-exa} makes only sense together with the Perl script \texttt{pst2pdf}, which
+allows the use of Postscript code and running the document in \textsc{pdf} mode.
+
+\end{document}
