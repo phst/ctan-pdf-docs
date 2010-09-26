@@ -1,0 +1,170 @@
+\documentclass[german, pagesize=auto, fontsize=12pt, headings=normal]{scrartcl}
+
+\usepackage{fixltx2e}
+\usepackage{etex}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{csquotes}
+\usepackage{array}
+\usepackage{microtype}
+\usepackage{hyperref}
+
+\newcommand*{\mail}[1]{\href{mailto:#1}{\texttt{#1}}}
+\newcommand*{\bmail}[1]{\href{mailto:#1}{\texttt{<#1>}}}
+\newcommand*{\pkg}[1]{\textsf{#1}}
+\newcommand*{\cs}[1]{\texttt{\textbackslash#1}}
+\makeatletter
+\newcommand*{\cmd}[1]{\cs{\expandafter\@gobble\string#1}}
+\makeatother
+
+\addtokomafont{title}{\rmfamily}
+
+\title{Das Paket \pkg{r\_und\_s}\thanks{Dieses Dokument bezieht sich auf \pkg{r\_und\_s.sty}~v1.3i vom~01.\,12.\,2005.}}
+\subtitle{R- und S-Sätze für \LaTeX}
+\author{Thiemo Nordenholz\thanks{\mail{nz@thiemo.net}}}
+\date{01.\,12.\,2005}
+
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+
+\section{Copyright und Disclaimer}
+
+\begin{quote}
+  \footnotesize
+  Copyright © 1997–2005 Thiemo Nordenholz \bmail{nz@thiemo.net} \\
+  All rights reserved.
+
+  Redistribution and use in source and binary forms, with or without
+  modification, are permitted provided that the following conditions
+  are met:
+  %
+  \begin{enumerate}
+  \item Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+  \item Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in the
+    documentation and/or other materials provided with the distribution.
+  \end{enumerate}
+
+  \SetTracking[spacing={700*,400*,}]{encoding=*, family=*}{60}%
+  \lsstyle
+  THIS SOFTWARE IS PROVIDED BY THE AUTHOR AND CONTRIBUTORS ``AS IS'' AND
+  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+  ARE DISCLAIMED\@.  IN NO EVENT SHALL THE AUTHOR OR CONTRIBUTORS BE LIABLE
+  FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+  DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+  OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+  HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+  LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+  OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+  SUCH DAMAGE.%
+\end{quote}
+
+
+\section{Beschreibung}
+
+Dieses Paket definiert \LaTeX- bzw.\ \TeX-Befehle, die an den jeweiligen
+Stellen eine protokollfähige Form der Sicherheitsratschläge, der sog. R"~
+und S"~Sätze, einsetzen. Dies beschleunigt z.\,B.\ das Erstellen von
+Protokollen und Sicherheitsblättern erheblich. Die Datei \texttt{r\_und\_s.sty} ist
+das \LaTeX-Stylefile, die Datei \texttt{r\_und\_s.tex} enthält die gleiche
+Funktionalität für die Verwendung mit \TeX.
+
+
+\subsection{Sprachen}
+
+Folgende Sprachen werden durch die entsprechenden Dateien unterstützt:
+
+\medskip
+\begin{tabular}{@{}l>{\ttfamily}l@{}}
+  Deutsch        & r\_und\_s \\
+  Englisch       & eng\_rs   \\
+  Niederländisch & nl\_rs    \\
+  Französisch    & fr\_rs    \\
+\end{tabular}
+
+
+\section{Verwendung}
+
+Zum Laden des Stylefiles und zur Verwendung der darin definierten Befehle
+ziehe man die einschlägigen \LaTeX- bzw.\ \TeX-Dokumentationen zu Rate.
+
+Die Sätze S\,5, S\,6, S\,14, S\,28, S\,40, S\,43, S\,47, S\,48 und S\,50 sowie die
+Kombinationen S\,3/14, S\,3/9/14, S\,3/9/14/19 und S\,47/49 erfordern die Übergabe
+eines Parameters, der den jeweils vom Hersteller anzugebenden Stoff
+bezeichnet.
+
+
+\section{Codierung der R- und S-Sätze (RSS)}
+
+Die Befehle des Paketes sind zunächst grob unterteilt in R"~Sätze und
+S"~Sätze. Erstere beginnen mit \cmd{\cr}, letzere mit \cmd{\cs}. Das \enquote{\texttt{c}} am Anfang steht
+für \enquote{Chemie} oder ähnliches, um eine Abgrenzung zu anderen Befehlen zu
+bieten.
+
+Da die Numerierung der RSS in numerischer Form in \LaTeX\ nicht übernommen
+werden konnte, mußte eine Codierung erfolgen. Die Ziffern wurden wie folgt,
+wie ich finde logisch, codiert:
+
+\medskip
+\begin{tabular}{@{}l@{$\;\to\;$}>{\ttfamily}ll@{}}
+  0 & o & (sieht ähnlich aus, oder?) \\
+  1 & e & (wie \enquote{eins})       \\
+  2 & z & (wie \enquote{zwei})       \\
+  3 & d & (\dots)                    \\
+  4 & v &                            \\
+  5 & f &                            \\
+  6 & s &                            \\
+  7 & i & (Tricky\dots\ :-)          \\
+  8 & a &                            \\
+  9 & n & 
+\end{tabular}
+
+\medskip
+\noindent
+Der R"~Satz~2 ist also \cmd{\crz}, der R"~Satz~17 wird analog \cmd{\crei} (Chemie, R"~Satz,
+eins"~sieben)
+
+Kombinierte Sätze besitzen zur eindeutigen Identifikation einen dritten 
+Buchstaben \enquote{\texttt{c}} (für \enquote{combined}), der R"~Satz~R\,23/24/25 wird damit zu
+\cmd{\crczdzvzf} (Chemie, R"~Satz, kombiniert, zwei"~drei"~zwei"~vier"~zwei"~fünf).
+
+Umständlich vielleicht, aber der einzige mir vernünftige Weg –~und ich
+habe mich mittlerweile daran gewöhnt ;-)
+
+
+\section{Vollständigkeit}
+
+Die Datenbank umfasst Sicherheitssätze bis einschließlich R\,64 und S\,62
+sowie ihre gebräuchlichen Kombinationen.
+Die Kombination S\,37/38/39 ist in der französischen und niederländischen
+Version nicht vorhanden. Ersatzweise wird eine mit \enquote{XXX} gekennzeichnete
+englische Fassung wiedergegeben.
+
+
+\section{Verbesserungsvorschläge, Kommentare, etc.}
+
+Bitte per eMail an mich, ich werde den Dingen dann nachgehen und auf jeden
+Fall den Eingang der Mails bestätigen.
+
+\begin{quote}
+  \begin{tabbing}
+    Thiemo Nordenholz, \= Clausthal-Zellerfeld, den 03. März 1999 \\
+    updated:           \> Hamburg, den 01. Dezember 2005
+  \end{tabbing}
+  %
+  eMail: \mail{nz@thiemo.net}
+
+  translated into \TeX-macro by \mail{eike.kunst@tu-clausthal.de}
+\end{quote}
+
+
+\end{document}

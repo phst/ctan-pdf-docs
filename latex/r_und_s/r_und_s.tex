@@ -1,0 +1,163 @@
+\documentclass[pagesize=auto, fontsize=12pt, headings=normal]{scrartcl}
+
+\usepackage{fixltx2e}
+\usepackage{etex}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage[utf8]{inputenc}
+\usepackage{csquotes}
+\usepackage{array}
+\usepackage{microtype}
+\usepackage{hyperref}
+
+\newcommand*{\mail}[1]{\href{mailto:#1}{\texttt{#1}}}
+\newcommand*{\bmail}[1]{\href{mailto:#1}{\texttt{<#1>}}}
+\newcommand*{\pkg}[1]{\textsf{#1}}
+\newcommand*{\cs}[1]{\texttt{\textbackslash#1}}
+\makeatletter
+\newcommand*{\cmd}[1]{\cs{\expandafter\@gobble\string#1}}
+\makeatother
+
+\addtokomafont{title}{\rmfamily}
+
+\title{The \pkg{r\_und\_s} package\thanks{This manual corresponds to \pkg{r\_und\_s.sty}~v1.3i, dated~September 1, 2005.}}
+\subtitle{R- and S-phrases for \LaTeX}
+\author{Thiemo Nordenholz\thanks{\mail{nz@thiemo.net}}}
+\date{September 1, 2005}
+
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+
+\section{Copyright and disclaimer}
+
+\begin{quote}
+  \footnotesize
+  Copyright © 1997–2005 Thiemo Nordenholz \bmail{nz@thiemo.net} \\
+  All rights reserved.
+
+  Redistribution and use in source and binary forms, with or without
+  modification, are permitted provided that the following conditions
+  are met:
+  %
+  \begin{itemize}
+  \item Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+  \item Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in the
+    documentation and/or other materials provided with the distribution.
+  \end{itemize}
+
+  \SetTracking[spacing={700*,400*,}]{encoding=*, family=*}{60}%
+  \lsstyle
+  THIS SOFTWARE IS PROVIDED BY THE AUTHOR AND CONTRIBUTORS ``AS IS'' AND
+  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+  ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR OR CONTRIBUTORS BE LIABLE
+  FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+  DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+  OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+  HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+  LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+  OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+  SUCH DAMAGE.
+\end{quote}
+
+
+\section{Description}
+
+This packet provides \LaTeX- resp.\ \TeX-Commands, which will expand numeric R-
+and S-codes to a full text form. This is usable for creating safety data
+sheets and lab protocols. The \texttt{*.sty} files are for \LaTeX, the \texttt{*.tex} files are
+plain~\TeX.
+
+
+\subsection{Languages}
+
+The following languages are supported and contained in the mentioned files:
+
+\medskip
+\begin{tabular}{@{}l>{\ttfamily}l@{}}
+  German  & r\_und\_s \\
+  English & eng\_rs   \\
+  Dutch   & nl\_rs    \\
+  French  & fr\_rs    \\
+\end{tabular}
+
+
+\section{Usage}
+
+For information on how to use external macros in \LaTeX\ and \TeX, please
+consult one of the many documentations written on this subject. 
+The phrases S\,5, S\,6, S\,14, S\,28, S\,40, S\,43, S\,47, S\,48, S\,50, and the combinations
+S\,3/14, S\,3/9/14, S\,3/9/14/19, and S\,47/49 need a parameter specified by the
+manufacturer of the product.
+
+
+\section{Coding of the numbers}
+
+First, the phrases contained in this package are divided into \enquote{R-} and \enquote{S-}
+prases, beginning \enquote{\cmd{\cr}} and \enquote{\cmd{\cs}}. The \enquote{c} at the beginning stands for
+\enquote{Chemie} or \enquote{chemistry} to avoid conflicts with other \LaTeX-commands.
+
+Because the numerical coding of the R- and S-phrases is not possible with
+\LaTeX, the phrases are \enquote{numbered} with letters (unfortunately, the coding
+requires the knowledge of a little bit germany, but it's really easy\dots)
+
+\medskip
+\begin{tabular}{@{}l@{$\;\to\;$}>{\ttfamily}ll@{}}
+  0 & o & (the \enquote{o} looks like a zero, doesn't it?)                               \\
+  1 & e & (\enquote{eins} is german for \enquote{one)}                                   \\
+  2 & z & (\enquote{zwei}, what means \enquote{two})                                     \\
+  3 & d & (\enquote{drei})                                                               \\
+  4 & v & (\enquote{vier})                                                               \\
+  5 & f & (\enquote{fünf})                                                               \\
+  6 & s & (\enquote{sechs})                                                              \\
+  7 & i & (\enquote{sieben}, but \enquote{s} is already used, so took the second letter) \\
+  8 & a & (\enquote{acht});                                                              \\
+  9 & n & (\enquote{neun} and, how nice, \enquote{nine} :-)
+\end{tabular}
+
+\medskip
+\noindent
+For example, R-phrase~2 becomes \cmd{\crz}, R-phrase~17 becomes \cmd{\crei}, which reads
+\enquote{chemistry, r-phrase eins-sieben (one-seven)}.
+
+Combined phrases need the additional character \enquote{c} (for \enquote{combined}), e.\,g.\ %
+R\,23/24/25 becomes \enquote{\cmd{\crczdzvzf}} (chemistry, r-phrase, combined, zwei-drei-
+zwei-vier-zwei-fünf (two-three-two-four-two-five).
+
+Seems difficult? Maybe, but I've gotten used to it, and so will you ;-)
+
+
+\section{Completeness}
+
+The package contains R- and S-phrases up to R\,64 and S\,62 and their most
+important combinations.
+In the French and Dutch version, the combination S\,37/38/39 is missing and
+included in English only, marked with \enquote{XXX}.
+
+
+\section{Comments}
+
+Please send any comments to my email address given below, I will take a look
+at them and promise to send at least a short confirmation when I recieved the 
+mail.
+
+\begin{quote}
+  \begin{tabbing}
+    Thiemo Nordenholz, \= Clausthal-Zellerfeld, den 03. März 1999 \\
+    updated:           \> Hamburg, den 01. Dezember 2005
+  \end{tabbing}
+  %
+  eMail: \mail{nz@thiemo.net}
+
+  translated into \TeX-macro by \mail{eike.kunst@tu-clausthal.de}
+\end{quote}
+
+
+\end{document}
