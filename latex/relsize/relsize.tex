@@ -1,0 +1,166 @@
+\documentclass[pagesize=auto]{scrartcl}
+
+\usepackage{fixltx2e}
+\usepackage{etex}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{amstext}
+\usepackage{booktabs}
+\usepackage{microtype}
+\usepackage{hyperref}
+
+\newcommand*{\mail}[1]{\href{mailto:#1}{\texttt{#1}}}
+\newcommand*{\pkg}[1]{\textsf{#1}}
+\newcommand*{\cs}[1]{\texttt{\textbackslash#1}}
+\makeatletter
+\newcommand*{\cmd}[1]{\cs{\expandafter\@gobble\string#1}}
+\makeatother
+\newcommand*{\meta}[1]{\textlangle\textsl{#1}\textrangle}
+\newcommand*{\marg}[1]{\texttt{\{}\meta{#1}\texttt{\}}}
+
+\addtokomafont{title}{\rmfamily}
+
+\title{The \pkg{relsize} package\thanks{This manual corresponds to \pkg{relsize.sty}~v3.1, dated~July 4, 2003.}}
+\author{%
+  by Donald Arseneau\thanks{\mail{asnd@triumf.ca},  Vancouver, Canada}%
+  \and origianally based on \pkg{smaller.sty} by Bernie Cosell\thanks{\mail{cosell@WILMA.BBN.COM}},%
+  \and and combined with the version by Matt Swift\thanks{\mail{swift@bu.edu}}.%
+}   
+\date{July 4, 2003}
+
+
+\begin{document}
+
+\maketitle
+
+\noindent
+It is frequently the case that something should be typeset somewhat larger
+or smaller than the surrounding text, whatever that size happens to be.
+Specifying such sizing commands explicitly makes it difficult to modify the
+font sizes of a document at a later time, and makes it hard to write macros
+that work at arbitrary sizes.  \pkg{Relsize.sty} defines several commands for \LaTeX\ %
+to set font sizes relative to the current size.
+
+To refresh your memory, the font sizing commands in \LaTeX\ are, in order:
+\cmd{\tiny}, \cmd{\scriptsize}, \cmd{\footnotesize}, \cmd{\small}, \cmd{\normalsize}, \cmd{\large}, \cmd{\Large},
+\cmd{\LARGE}, \cmd{\huge}, \cmd{\Huge} (package \pkg{moresize} adds \cmd{\ssmall} and \cmd{\HUGE}).  The main 
+new command provided by \pkg{relsize.sty} is \cmd{\relsize}, which takes one (positive
+or negative) number as its argument; the number specifies how many ``steps''
+by which to change the font size, where each step is a scaling factor of~%
+1.2, corresponding to the usual difference between the size commands.  For
+example, if \verb|{\relsize{-2} smaller}| appears in normal sized text, the word
+``smaller'' is printed in script size type.  If the same command appears in a 
+\cmd{\Large} section title, then ``smaller'' is printed in normal size. 
+
+\begin{sloppypar}
+  There are also the commands \cmd{\larger} and \cmd{\smaller}, which normally change the
+  font size by one step in the obvious direction; \cmd{\larger} is an abbreviation
+  for \verb|\relsize{+1}|, and \cmd{\smaller} is an abbreviation for \verb|\relsize{-1}|. For
+  example, \verb+{\large... \larger{WOW!}}+ prints ``WOW'' in \cmd{\Large} type.  You can
+  also specify bigger steps as an optional argument for \cmd{\larger} and \cmd{\smaller}: 
+  \verb+\larger[3]+ is equivalent to \verb+\relsize{3}+; \verb+\smaller[2]+ is \verb+\relsize{-2}+.
+  Both \cmd{\larger} and \cmd{\smaller} accept negative arguments, but please don't make
+  things so obscure!  If you want to change size by several steps it is 
+  much better to give an increment than to string several \cmd{\larger} commands
+  together; i.\,e.\@, \verb+\relsize{3}+ or \verb+\larger[3]+, but not \verb+\larger\larger\larger+.
+\end{sloppypar}
+
+All of the \cmd{\relsize}, \cmd{\larger}, and \cmd{\smaller} commands are ``switches'' just
+like the regular sizing commands.  That is, they change the size for all
+following text until the scope is ended by a closing brace.  There are
+alternate versions called \cmd{\textlarger} and \cmd{\textsmaller} that take some text
+as an argument and apply the size change to only that text:
+\verb+\textlarger{big}+.
+
+Using the number of ``magnification steps'' to indicate font size can
+be confusing to some people, and limiting in certain uses.  There are 
+commands with syntax \cmd{\text\-scale}\marg{factor}\marg{text} and \cmd{\relscale}\marg{factor} to
+select the size based on a scale factor, like \verb+{0.75}+.
+
+If the size requested is too small or too large, a warning is given, and
+the size will only change as far as appropriate, typically \cmd{\tiny} or \cmd{\Huge}.
+These limits are controlled by the commands \cmd{\RSsmallest} and \cmd{\RSlargest}, which
+get set automatically when \pkg{relsize.sty} is loaded, but you can redefine them
+to other length values: \verb+\renewcommand\RSlargest{50pt}+.
+
+Fine point:  The combination \cmd{\relsize}\marg{n}\cmd{\relsize}\texttt{\{}$-\text{\meta{n}}$\texttt{\}} is not guaranteed to 
+restore the current font size!  That is because the increment \meta{n} may be
+enough to overflow the range of sizes.  Say you are in \cmd{\huge} text already,
+and you do \verb+\relsize{4}+.  There is nothing bigger than \cmd{\Huge} so that is the
+size you get.  Then an ensuing \verb+\relsize{-4}+ will take four steps smaller
+and change the size to \cmd{\large}.  You should use grouping to undo relative 
+size changes because it is unsafe to counteract one change with an ``equal''
+change in the opposite direction.
+
+Typically, the font-size commands do not select fonts at regular size
+intervals.  \cmd{\relsize} (and the others) will select, and execute, the command
+for the size closest to the desired size.  Then, if the relative difference 
+from the target size is more than \cmd{\RSpercentTolerance} a further font-size
+selection is made.  By~default, \cmd{\RSpercentTolerance} is an empty macro, which
+causes automatic selection: ``30'' (30\,\%) when the current ``fontshape'' definition
+is composed of only discrete sizes, and ``5'' when the fontshape definition
+covers ranges of sizes.  The higher setting for discrete fonts ensures
+only the pre-defined sizes get used.  (By~default \LaTeX\ uses Computer
+Modern fonts at discrete sizes; you get full coverage of sizes by using
+\verb+\usepackage{type1cm}+\@.)  For special uses, or when the font shape definitions 
+are not parsed properly, you can redefine the percent tolerance: 
+\verb+\renewcommand\RSpercentTolerance{10}+.
+
+\enlargethispage{-5\baselineskip}
+
+All of the commands described above are text commands; they cannot be used
+in math mode.  There are special \cmd{\mathsmaller} and \cmd{\mathlarger} commands
+provided, but these do not use the same sizes that the text versions use.
+Instead, they step between the usual math ``styles'' which you can explicitly
+set using the commands \cmd{\displaystyle}, \cmd{\textstyle}, \cmd{\scriptstyle}, and
+\cmd{\scriptscriptstyle} [see Lamport, \LaTeX/Manual (1st~ed, p.\,54); GMS The \LaTeX\ %
+Companion, p.\,255]\@.  However, the \cmd{\mathlarger} command will also increase the
+size beyond regular \cmd{\displaystyle} by selecting a larger regular font size
+(using \cmd{\larger})\@.  (Yes, this is a kludge, and doesn't work very well, but 
+it can still be useful.)  If you want to use this to create big integral 
+signs, then you must also load the package \pkg{exscale} so that math symbols
+can change size.  The sizes selected are:
+%
+\begin{flushleft}
+  \small
+  \begin{tabular}{@{}lll@{}}
+    \toprule
+    Current style            & \cmd{\mathsmaller} gives        & \cmd{\mathlarger} gives                     \\
+    \cmidrule(r){1-1}         \cmidrule(lr){2-2}               \cmidrule(l){3-3}
+    \cmd{\displaystyle}      & \cmd{\textstyle} (almost same)  & \cmd{\displaystyle} in a \cmd{\larger} font \\
+    \cmd{\textstyle}         & \cmd{\scriptstyle}              & \cmd{\displaystyle} (almost same)           \\
+    \cmd{\scriptstyle}       & \cmd{\scriptscriptstyle}        & \cmd{\textstyle}                            \\
+    \cmd{\scriptscriptstyle} & \cmd{\scriptscriptstyle} (same) & \cmd{\scriptstyle}                          \\
+    \bottomrule
+  \end{tabular}
+\end{flushleft}
+%
+For example, try \verb+$\frac{\mathlarger{E}}{E}$+.  Note that, for most symbols,
+\cmd{\display\-style} and \cmd{\textstyle} are the same size, so \verb+$N \mathlarger{N}$+
+gives two identical $N$'s, but \cmd{\sum} and \cmd{\int} do get bigger in display style: 
+\verb+$\int\mathlarger{\int}$+, and fractions are treated differently too: 
+\verb+$\frac{1}{2} \mathlarger{\frac{1}{2}}$+.  As you might have guessed, 
+\cmd{\mathlarger} and \cmd{\mathsmaller} should only be used in math mode.
+
+These commands will attempt to attach superscripts and subscripts to the 
+symbol as if the symbol were used alone: \verb+$\mathlarger{\int}_{0}^{\infty}$+
+but math accents and the math spacing behave as if the symbol is enclosed
+in braces (which it is).  Comparing 
+%
+\begin{flushleft}
+  \footnotesize
+\begin{verbatim}
+\[
+| \times | {\times} | \mathlarger{\times} | \mathbin{\mathlarger{\times}} |
+\] 
+\end{verbatim}
+\end{flushleft}
+%
+shows that operators must be explicitly declared to use the right operator
+type (\cmd{\mathrel}, \cmd{\mathbin}, \cmd{\mathop}) to get the correct spacing.
+
+Due to their oddities, the math larger/smaller commands should not be 
+trusted blindly, and they will not be useful in every instance.
+
+\end{document}
