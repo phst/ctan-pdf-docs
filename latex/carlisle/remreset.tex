@@ -1,0 +1,52 @@
+\documentclass[pagesize=auto, fontsize=14pt, parskip=half, DIV=10]{scrartcl}
+
+\usepackage{fixltx2e}
+\usepackage{etex}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{microtype}
+\usepackage{hyperref}
+
+\newcommand*{\pkg}[1]{\textsf{#1}}
+\newcommand*{\cs}[1]{\texttt{\textbackslash#1}}
+\makeatletter
+\newcommand*{\cmd}[1]{\cs{\expandafter\@gobble\string#1}}
+\makeatother
+
+\addtokomafont{title}{\rmfamily}
+
+\title{The \pkg{remreset} package}
+\author{David Carlisle}
+\date{1997/09/28}
+
+
+\begin{document}
+
+\maketitle
+
+\LaTeX\ includes a command \cmd{\@addtoreset} that is used to declare that
+a counter should be reset every time a second counter is incremented.
+
+For example the book class has a line
+%
+\begin{verbatim}
+  \@addtoreset{footnote}{chapter}
+\end{verbatim}
+%
+So that the footnote counter is reset each chapter.
+
+If you wish to bas a new class on book, but without this counter
+being reset, then standard \LaTeX\ gives no simple mechanism to do
+this.
+
+This package defines \cmd{\@removefromreset} which just undoes the effect
+of \cmd{\@addtorest}. So for example a class file may be defined by
+%
+\begin{verbatim}
+  \LoadClass{book}
+  \@removefromreset{footnote}{chapter}
+\end{verbatim}
+
+\end{document}
+
