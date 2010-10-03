@@ -1,0 +1,35 @@
+\documentclass[pagesize=auto, fontsize=14pt, DIV=9, parskip=half]{scrartcl}
+
+\usepackage{fixltx2e}
+\usepackage{etex}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{microtype}
+\usepackage{hyperref}
+
+\newcommand*{\pkg}[1]{\textsf{#1}}
+
+\addtokomafont{title}{\rmfamily}
+
+\title{The \pkg{rotate} package}
+\author{Anonymous}
+\date{13 Jan 2006}
+
+
+\begin{document}
+
+\maketitle
+
+\noindent
+
+These macros allow you to rotate or flip a \TeX\ box.  Very useful for
+sideways tables or upsidedown answers.
+
+To use, create a box containing the information you want to rotate.
+(An hbox or vbox will do.)  Now call \verb|\@rotr\boxnum| to rotate the
+material and create a new box with the appropriate (flipped) dimensions.
+\verb|\@rotr| rotates right, \verb|\@rotl| rotates left, \verb|\@rotu| turns upside down, and
+\verb|\@rotf| flips.  These boxes may contain other rotated boxes.
+
+\end{document}
