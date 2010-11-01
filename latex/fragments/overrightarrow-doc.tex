@@ -1,0 +1,33 @@
+\documentclass[pagesize=auto, fontsize=14pt, DIV=9, parskip=half]{scrartcl}
+
+\usepackage{fixltx2e}
+\usepackage{etex}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{microtype}
+\usepackage{hyperref}
+
+\newcommand*{\mail}[1]{\href{mailto:#1}{\texttt{#1}}}
+\newcommand*{\pkg}[1]{\textsf{#1}}
+\newcommand*{\cs}[1]{\texttt{\textbackslash#1}}
+\makeatletter
+\newcommand*{\cmd}[1]{\cs{\expandafter\@gobble\string#1}}
+\makeatother
+
+\addtokomafont{title}{\rmfamily}
+
+\title{The \pkg{overrightarrow} package}
+\author{James Kilfiger\thanks{\mail{mapdn@csv.warwick.ac.uk}}}
+\date{December 1999}
+
+
+\begin{document}
+
+\maketitle
+
+The \pkg{overrightarrow} package provides for a command:\\
+\cmd{\Overrightarrow} which is somewhat like \cmd{\overrightarrow} and somewhat
+like \cmd{\Rightarrow}.  Also a couple of helper commands.
+
+\end{document}
