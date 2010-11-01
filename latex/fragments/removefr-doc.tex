@@ -1,0 +1,35 @@
+\documentclass[pagesize=auto, fontsize=14pt, DIV=9, parskip=half]{scrartcl}
+
+\usepackage{fixltx2e}
+\usepackage{etex}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{microtype}
+\usepackage{hyperref}
+
+\newcommand*{\mail}[1]{\href{mailto:#1}{\texttt{#1}}}
+\newcommand*{\pkg}[1]{\textsf{#1}}
+\newcommand*{\cs}[1]{\texttt{\textbackslash#1}}
+\makeatletter
+\newcommand*{\cmd}[1]{\cs{\expandafter\@gobble\string#1}}
+\makeatother
+\newcommand*{\meta}[1]{\textlangle\textsl{#1}\textrangle}
+\newcommand*{\marg}[1]{\texttt{\{}\meta{#1}\texttt{\}}}
+
+\addtokomafont{title}{\rmfamily}
+
+\title{The \pkg{removefr} package}
+\author{Donald Arseneau\thanks{\mail{asnd@erich.triumf.ca}}}
+\date{30 Jul 1994}
+
+
+\begin{document}
+
+\maketitle
+
+\cmd{\@removefromreset}\marg{FOO}\marg{BAR} : Removes counter \meta{FOO} from the list of
+counters \cmd{\cl@\meta{BAR}} to be reset when counter \meta{BAR}
+is stepped.  The opposite of \cmd{\@addtoreset}.
+
+\end{document}
