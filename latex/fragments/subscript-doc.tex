@@ -1,0 +1,35 @@
+\documentclass[pagesize=auto, fontsize=14pt, DIV=9, parskip=half]{scrartcl}
+
+\usepackage{fixltx2e}
+\usepackage{etex}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{microtype}
+\usepackage{hyperref}
+
+\newcommand*{\pkg}[1]{\textsf{#1}}
+\newcommand*{\cs}[1]{\texttt{\textbackslash#1}}
+\makeatletter
+\newcommand*{\cmd}[1]{\cs{\expandafter\@gobble\string#1}}
+\makeatother
+
+\addtokomafont{title}{\rmfamily}
+
+\title{The \pkg{subscript} package}
+\author{Robin Fairbairns}
+\date{1999}
+
+
+\begin{document}
+
+\maketitle
+
+this fragment provides a command \cmd{\textsubscript}, which is
+shamelessly copied from the command \cmd{\textsuperscript} that's part of
+\LaTeX
+
+the fragment may be used as a package in its own right, if so
+needed.
+
+\end{document}
