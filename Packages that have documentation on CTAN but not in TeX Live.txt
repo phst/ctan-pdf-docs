@@ -1,9 +1,8 @@
-dblfnote
 chessboard
 datenumber
+dblfnote
 dcpic
 easy
-yafoot
 formlett
 harpoon
 inlinebib
@@ -14,3 +13,5 @@ mff
 newvbtm
 ntabbing
 pictex
+stmaryrd
+yafoot
