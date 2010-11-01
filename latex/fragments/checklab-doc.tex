@@ -1,0 +1,54 @@
+\documentclass[pagesize=auto, fontsize=12pt, DIV=9, parskip=half]{scrartcl}
+
+\usepackage{fixltx2e}
+\usepackage{etex}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{microtype}
+\usepackage{hyperref}
+
+\newcommand*{\mail}[1]{\href{mailto:#1}{\texttt{#1}}}
+\newcommand*{\pkg}[1]{\textsf{#1}}
+\newcommand*{\cs}[1]{\texttt{\textbackslash#1}}
+\makeatletter
+\newcommand*{\cmd}[1]{\cs{\expandafter\@gobble\string#1}}
+\makeatother
+
+\addtokomafont{title}{\rmfamily}
+
+\title{The \pkg{checklab} package}
+\subtitle{Making those `Label(s) have changed\dots' messages more explicit}
+\author{Robin Fairbairns\thanks{\mail{rf10@cl.cam.ac.uk}}}
+\date{1999/01/15}
+
+
+\begin{document}
+
+\maketitle
+
+The \LaTeX{} kernel produces the messages when something, while the~%
+\verb|.aux| file is being scanned (after the \cs{AtEndDocument} tokens
+have been executed), sets the \cs{if@tempswa} switch with the
+command \cs{@tempswatrue}.
+
+(This fact can be used by packages, such as my \pkg{footmisc.sty}, to
+piggy-back on the message; but it's nice in that circumstance and
+others to be sure where the message is coming from.)
+
+This is a jiffy patch to the kernel so that it produces a
+(\cs{typeout}) message for each label \emph{it} thinks has changed.
+
+\begin{labeling}{Usage:}
+\item[Usage:]
+  Incorporate this code into a package or class file, \hfill or \\
+  \cmd{\input} this file from a package or class file, \hfill or \\
+  \verb|\makeatletter \input{checklab} \makeatother| in your document preamble
+\end{labeling}
+
+This software jiffy is placed in the public domain.  Do with it as
+you wish, though I have to say I would prefer you not to claim it
+as your own (\textsc{otoh}, it's the product of a twisted mind, so probably
+not an attractive thing to claim).
+
+\end{document}
