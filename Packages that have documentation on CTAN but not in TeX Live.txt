@@ -16,3 +16,4 @@ pictex
 stmaryrd
 yafoot
 susy
+tclldoc

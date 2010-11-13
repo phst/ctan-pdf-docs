@@ -1,0 +1,57 @@
+\documentclass[pagesize=auto, fontsize=14pt, parskip=full, DIV=9]{scrartcl}
+
+\usepackage{fixltx2e}
+\usepackage{etex}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage[utf8]{inputenc}
+\usepackage[svgnames]{xcolor}
+\usepackage{listings}
+\usepackage{microtype}
+\usepackage{hyperref}
+
+\newcommand*{\mail}[1]{\href{mailto:#1}{\texttt{#1}}}
+\newcommand*{\pkg}[1]{\textsf{#1}}
+
+\addtokomafont{title}{\rmfamily}
+
+\lstset{%
+  language=[LaTeX]TeX,%
+  columns=flexible,%
+  upquote=true,%
+  numbers=left,%
+  basicstyle=\ttfamily,%
+  keywordstyle=\color{Navy},%
+  commentstyle=\color{DimGray},%
+  stringstyle=\color{SeaGreen},%
+  numberstyle=\scriptsize\color{SlateGray}%
+}
+
+\title{The \pkg{texilikecover} package\thanks{This manual corresponds to \pkg{texilikecover.sty}~v0.1, dated~5-Apr-2007.}}
+\author{Alberto Manuel Brandão Simões\thanks{\mail{ambs@cpan.org}}}
+\date{5-Apr-2007}
+
+
+\begin{document}
+
+\maketitle
+
+These macros may be freely transmitted, reproduced, or modified
+provided that this notice is left intact.
+
+
+\minisec{Quick recipe:}
+
+\begin{lstlisting}
+\usepackage{texilikecover}
+\title{My Title}
+\subtitle{My Subtitle}
+\date{Date or version info}
+\author{Name \and Name \and Name}
+
+\begin{document}
+\maketitle
+\end{lstlisting}
+
+\end{document}
