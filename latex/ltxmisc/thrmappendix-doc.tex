@@ -1,0 +1,233 @@
+\documentclass[pagesize=auto]{scrartcl}
+
+\usepackage{fixltx2e}
+\usepackage{etex}
+\usepackage{xspace}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage[svgnames]{xcolor}
+\usepackage{amsmath}
+\usepackage{listings}
+\usepackage{microtype}
+\usepackage{hyperref}
+
+\newcommand*{\secbreak}{\par\medskip\centerline{$*\quad*\quad*$}\par\medskip}
+\newcommand*{\mail}[1]{\href{mailto:#1}{\texttt{#1}}}
+\newcommand*{\pkg}[1]{\textsf{#1}}
+\newcommand*{\cs}[1]{\texttt{\textbackslash#1}}
+\makeatletter
+\newcommand*{\cmd}[1]{\cs{\expandafter\@gobble\string#1}}
+\makeatother
+\newcommand*{\meta}[1]{\textlangle\textsl{#1}\textrangle}
+\newcommand*{\marg}[1]{\texttt{\{}\meta{#1}\texttt{\}}}
+
+\addtokomafont{title}{\rmfamily}
+
+\lstset{%
+  language=[LaTeX]TeX,%
+  columns=flexible,%
+  upquote=true,%
+  numbers=left,%
+  basicstyle=\ttfamily,%
+  keywordstyle=\color{Navy},%
+  commentstyle=\color{DimGray},%
+  stringstyle=\color{SeaGreen},%
+  numberstyle=\scriptsize\color{SlateGray}%
+}
+
+\title{The \pkg{thrmappendix} package}
+\author{Ben Klemens\thanks{\mail{b@avocado.caltech.edu}}}
+\date{2 Jan 2003}
+
+
+\begin{document}
+
+\maketitle
+
+\begin{quote}
+  \footnotesize
+  \texttt{thrmappendix.sty} \textcopyright~2003, Ben Klemens
+
+  This program is free software; you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation; either version~2 of the License, or
+  (at your option) any later version.
+\end{quote}
+
+\noindent
+This is my implementation of theorems, lemmas, \&c.  The main goal is
+to let you reprint theorems in the appendix with their proofs, so the
+text isn't cluttered with long proofs, but the reader doesn't have to
+keep flipping back to the text to find out what you're talking about in
+the appendix.
+
+It also has the side benefits that the syntax here involves less typing
+and fewer redundancies than the default, so I use it even for things
+that won't ever be proven. Compare the standard:
+%
+\begin{lstlisting}
+\begin{definition} \label{xdef} 
+Let $x$ be a number.
+\end{definition}
+\end{lstlisting}
+%
+versus the alternative here:
+%
+\begin{lstlisting}
+\stmt{defn}{xdef}{
+Let $x$ be a number.
+}
+\end{lstlisting}
+
+\secbreak
+
+Here is a quick summary of the macros defined in this file:
+%
+\begin{description}
+\item[\cmd{\stmt}\marg{statement\textunderscore type}\marg{label}\marg{This is what I want to say}]
+  The definition of a theorem, assumption, \&c.
+\item[\cmd{\stmtproof}\marg{label}\marg{This is the proof.}]
+  Where you should write your proof, for use with:
+\item[\cmd{\rptstmtwithproof}\marg{label}]
+  This states the theorem and proof together.
+\item[\cmd{\rptstmt}\marg{label}]
+  This restates just the theorem.
+\item[\cmd{\refstmt}\marg{label}]
+  Prints, e.g., `Theorem 7'---like \cmd{\ref}\marg{label} but you don't have
+  to remember if it's a theorem, corollary, or lemma.
+\item[\cmd{\comment}\marg{blather}]
+  Delineates comments without all those darn percent signs.
+\end{description}
+
+\secbreak
+
+Here is a sample document using most all of the above. You can cut and
+paste it to another file and compile it to see what it does. 
+%
+\begin{lstlisting}
+\documentclass{article}
+\usepackage{thrmappendix}
+\begin{document}
+
+\section{A theorem}
+
+\stmt{thrm}{sample}{Socrates is mortal.}
+
+\refstmt{sample} can either be proven using data (the fact that
+Socrates is dead), or by the proof which is provided in the appendix.
+
+
+
+\section{Appendix}
+In this appendix, the reader will find proofs of theorems
+not given in the text.
+
+\stmtproof{sample}{Socrates is a man. All men are mortal.}
+
+\rptstmtwithproof{sample}
+
+\comment{Notice that you can put the \stmtproof{sample}{...} anywhere
+you want, including right after your statement, just before using
+\rptstmtwithproof, or a separate file (then use \input{proofs.tex}).
+That way, neither your finished paper nor your source will be
+cluttered with proofs.}
+\end{document}
+\end{lstlisting}
+
+\secbreak
+
+Here are the definitions of the types of theorems you can use
+with these commands, and the proof markers:
+
+\begin{lstlisting}
+\long\def\theproofmarkersforthrmappendix{
+
+%Format:
+%\newtype{nickname}{numbered like}{title}
+
+%inputs
+\newtype{ass}{ass}{Assumption}
+\newtype{defnition}{ass}{Definition}
+\newtype{defn}{ass}{Definition}
+
+%outputs
+\newtype{statement}{statement}{Proposition}
+\newtype{prop}{statement}{Proposition}
+\newtype{thrm}{statement}{Theorem}
+\newtype{corr}{statement}{Corollary}
+\newtype{lma}{statement}{Lemma}
+\newtype{guess}{statement}{Conjecture}
+
+
+\def\pf{{\bf Proof: }}
+\def\endpf{\hfill $\diamondsuit$}
+}
+\end{lstlisting}
+%
+These are my preferred environments (and numbering scheme);
+add your own or modify to suit. The format here is:
+\cmd{\newtype}\marg{nickname}\marg{numbered like}\marg{title}
+						
+E.g., the second line lets me put
+%
+\begin{lstlisting}
+\stmt{thrm}{mortalityresult}{Socrates is mortal.}
+\end{lstlisting}
+%
+in the \TeX\ file, since it defined the nickname `\texttt{thrm}'. If the statement
+counter is up to~\#7, then the output will be:
+%
+\begin{quote}
+  Theorem 7: Socrates is mortal.
+\end{quote}
+%
+since \texttt{thrm}s use the statement counter and print `Theorem'. To refer to
+this theorem in the text, you have two choices:
+%
+\begin{flushleft}
+  \begin{tabular}{l@{$\;\implies\;$}l}
+    \lstinline|\refstmt{mortalityresult}|     & Theorem 7 \\
+    \lstinline|Theorem \ref{mortalityresult}| & Theorem 7
+  \end{tabular}
+\end{flushleft}
+%
+The first form is nice because after you prove your result, you can
+change it from a theorem to a conjecture without hunting through the
+text to fix every reference.
+
+You can see that all of the results use the `\texttt{statement}' counter and
+all of the inputs use the `\texttt{ass}' counter.  Proposition~1 may be followed
+by Theorem~2, followed by Corollary~3.  This is my preferred numbering
+scheme, suggested by Paolo Ghirardato.  After all, the intent of numbering
+these things is not to keep score as to how many theorems you've got,
+but to make it easy for the reader to find what you're referring to;
+a consistent numbering system facilitates this (especially in a long proof
+appendix).
+
+[On the other hand, a referee of one of my papers complained that
+17 theorems and 18 corollaries was too many, and I could cut that in
+half. Of course, there were only 18 results total, and s/he was only
+glancing at the two results on the last page.]
+
+To use independent numbering for each type, simply change the second field
+in the definitions above to match the first field in each case. E.g.:
+%
+\begin{lstlisting}
+\newthrm{thrm}{thrm}{Theorem}
+\end{lstlisting}
+%
+will allow you to count theorems separately from other results.
+
+The \cmd{\rptstmtwithproof} macro here will include a marker at the beginning
+and end of the proof, so you don't have to include them yourself.
+The macros \cmd{\pf} and \cmd{\endpf} are defined above and can be redefined to
+suit. Popular endproof markers include:
+%
+\begin{lstlisting}
+\def\endpf{$blackbox$}
+\def\endpf{$blacklozenge$}
+\def\endpf{{\sc QED}}
+\end{lstlisting}
+
+\end{document}
