@@ -5,6 +5,8 @@ _region_.*
 *.prv
 *.fmt
 *.log
+*.ps
+*.dvi
 *.synctex
 *.synctex.gz
 *.aux

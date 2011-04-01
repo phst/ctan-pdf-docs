@@ -1,0 +1,8 @@
+\RequirePackage{filehook}
+\makeatletter
+\AtBeginOfPackageFile{hyperref}{%
+  \@namedef{opt@hyperref.sty}{dvips,hyperindex,unicode}%
+}
+\makeatother
+\date{2004/10/17}
+\input{ucs.dtx}
