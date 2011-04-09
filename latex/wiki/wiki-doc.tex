@@ -1,0 +1,148 @@
+\documentclass[pagesize=auto]{scrartcl}
+
+\usepackage{fixltx2e}
+\usepackage{etex}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage[utf8]{inputenc}
+\usepackage{microtype}
+\usepackage{hyperref}
+
+\newcommand*{\pkg}[1]{\textsf{#1}}
+\newcommand*{\cs}[1]{\texttt{\textbackslash#1}}
+\makeatletter
+\newcommand*{\cmd}[1]{\cs{\expandafter\@gobble\string#1}}
+\makeatother
+\newcommand*{\env}[1]{\texttt{#1}}
+\newcommand*{\opt}[1]{\texttt{#1}}
+\newcommand*{\meta}[1]{\textlangle\textsl{#1}\textrangle}
+\newcommand*{\oarg}[1]{\texttt{[}\meta{#1}\texttt{]}}
+
+\addtokomafont{title}{\rmfamily}
+
+\title{The \pkg{wiki} package\thanks{This manual corresponds to \pkg{wiki.sty}~v0.2, dated~2008/07/02.}}
+\author{Uwe Lück\thanks{\url{http://contact-ednotes.sty.de.vu}}}
+\date{2008/07/02}
+
+
+\begin{document}
+
+\maketitle
+
+\section{Features}
+
+The `\pkg{wiki}' package enables \LaTeX\ users to use some of the
+markup used in editing Wikipedia pages, cf.
+%
+\begin{quote}
+  \url{http://en.wikipedia.org/wiki/Wikipedia:Cheatsheet}
+\end{quote}
+%
+or German:
+%
+\begin{quote}
+  \url{http://de.wikipedia.org/wiki/Hilfe:Bearbeitungshilfe}\\
+  \url{http://de.wikipedia.org/wiki/Hilfe:Textgestaltung}
+\end{quote}
+
+Advantages of such a kind of markup are:
+%
+\begin{enumerate}
+\item easier and faster to type than \LaTeX\ code;
+
+\item intuitive, understandable at a glance;
+
+\item in reading the source code of the document,
+  the markup doesn't much distract from the \emph{text}
+  to be printed.
+\end{enumerate}
+
+There is a binary `\texttt{easylatex}' available on CTAN which is more
+powerful than the `\pkg{wiki}' package; the idea here is that a \emph{macro
+package} doing something similar is easier to use and to customize.
+
+
+\subsection{What the Package Supports}
+
+\begin{enumerate}
+\item \texttt{\textit{\textquotesingle\textquotesingle Italics\textquotesingle\textquotesingle}} are marked up by surrounding pairs of apostrophes,
+  \texttt{\textbf{\textquotesingle\textquotesingle\textquotesingle boldface\textquotesingle\textquotesingle\textquotesingle}} needs one apostrophe more on each side.
+  Boldface and italics may be nested or overlap.
+  (This endangers quoting, but I have dealt with it.)
+
+\item Surrounding ``equals'' symbols (`\texttt{=}') mark up section headings
+  etc.: `\verb+== Section ==+', `\verb+=== Subsection ===+', down to
+  `\verb+===== Subparagraph =====+'.
+
+\item If a line starts with `\texttt{*}', it becomes an item in an
+  `\env{itemize}' environment. Likewise, `\texttt{\#}' creates an `\env{enumerate}'
+  environment, and `\texttt{;}' makes an item in a `\env{discription}'
+  environment (differs from Wiki! -- since I don't understand
+  what the Wiki version is good for). `\texttt{:}' makes a `\env{quote}' --
+  while on Wikipedia instead is used for comments on talk
+  pages. But it is also used for indented math displays,
+  so it may be combined with \verb+$...$+ here.
+  An indented line is typeset \env{verbatim}. Each of these
+  environments is ended by a code line without leading blank
+  spaces.
+\end{enumerate}
+
+
+\subsection{Limitations}
+
+\begin{enumerate}
+\item The markup ``language'' provided here replaces a few most
+  common \LaTeX\ commands only in their most simple versions.
+  (Yet I think that already this makes the code more readable;
+  the more special cases are very rare.) E.\,g.,\ it's not
+  possible to suppress the italic correction as with
+  `\verb+\textit{...\nocorr}+'. However, in ``normal'' cases it
+  should be possible to use the more powerful \LaTeX\ markup
+  mixed with ``Wiki'' markup.
+
+\item The parsing algorithms employed here differ in outcome to
+  those of Wikipedia in difficult cases.
+
+\item Tables, nesting lists, links, Wiki templates and tags
+  are not supported -- and I don't expect that I can afford
+  improving this soon!
+
+\item I still have encountered problems that I didn't understand\dots
+\end{enumerate}
+
+
+\section{Package Options and User Commands}
+
+\sloppy
+\cmd{\usepackage}\oarg{options}\verb+{wiki}+, of course. There are \meta{options}
+`\opt{noEnvironments}', `\opt{noFonts}', `\opt{noHeadings}' giving up
+functionality for lists etc.,\ for italics and boldface,
+for section headings etc.,\ respectively.
+
+There are commands \cmd{\wikimarkup}, \cmd{\wikiEnvironments},
+\cmd{\wikiFonts}, \cmd{\wikiHead\-ings} to turn respective functionality on
+(unless disabled by package option). \cmd{\nowiki\-markup},
+\cmd{\nowikiEnvironments}, \cmd{\nowikiFonts}, \cmd{\nowikiHeadings} turn them
+off.
+
+\fussy
+\textbf{Vital:} The package does \emph{not} execute \cmd{\wikimarkup}
+because this would have strange effects, e.\,g.,\ packages
+loaded later may break. The user must put activating
+commands into the `\env{document}' environment, maybe just preceding
+the first heading.
+
+Dangers to be avoided by \cmd{\nowiki\dots} are:
+%
+\begin{itemize}
+\item \cmd{\wikiHeadings} (which also is executed by \cmd{\wikimarkup})
+  disables \TeX\ assignments using `\texttt{=}'.
+
+\item \cmd{\wikiEnvironments} (executed by \cmd{\wikimarkup}) executes macros
+  at every end of a code line (containing no comment marke),
+  and it tries to typeset a following line verbatim if it is
+  indented.
+\end{itemize}
+
+\end{document}
