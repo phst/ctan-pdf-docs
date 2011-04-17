@@ -1,0 +1,85 @@
+\documentclass[pagesize=auto]{scrartcl}
+
+\usepackage{fixltx2e}
+\usepackage{etex}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage[utf8]{inputenc}
+\usepackage{microtype}
+\usepackage{hyperref}
+
+\newcommand*{\mail}[1]{\href{mailto:#1}{\texttt{#1}}}
+\newcommand*{\pkg}[1]{\textsf{#1}}
+\newcommand*{\cs}[1]{\texttt{\textbackslash#1}}
+\makeatletter
+\newcommand*{\cmd}[1]{\cs{\expandafter\@gobble\string#1}}
+\makeatother
+\newcommand*{\ZifferStrich}{\textrm{-\kern0.1em-}}
+
+\addtokomafont{title}{\rmfamily}
+
+\title{The \pkg{ziffer} package\thanks{This manual corresponds to \pkg{ziffer.sty}~v2.1, dated~2002.}}
+\author{M. Väth\thanks{\mail{vaeth@mathematik.uni-wuerzburg.de}}}
+\date{2002}
+
+
+\begin{document}
+
+\maketitle
+
+\noindent
+This package provides the macros
+%
+\begin{flushleft}
+  \begin{tabular}{@{}ll@{}}
+    \cmd{\ZifferAn}  & (equivalent with \verb+\ZifferPunktAn \ZifferStrichAn +) \\
+    \cmd{\ZifferAus} & (equivalent with \verb+\ZifferPunktAus\ZifferStrichAus+) \\
+    \cmd{\ZifferPunktAn}                                                        \\
+    \cmd{\ZifferPunktAus}                                                       \\
+    \cmd{\ZifferStrichAn}                                                       \\
+    \cmd{\ZifferStrichAus}
+  \end{tabular}
+\end{flushleft}
+%
+If \cmd{\ZifferAn} was used, then in numbers in math-mode the following happens:
+%
+\begin{flushleft}
+  \begin{tabular}{@{}rl@{}}
+    `\texttt{.}'  & is used as a `one-thousand separator' as common in Germany \\
+    `\texttt{,}'  & is used as a decimal separator as common in Germany        \\
+    `\texttt{-{}-}' & generates a \ZifferStrich\ with better spacing (e.\,g.\ in 1.000,\ZifferStrich)
+  \end{tabular}
+\end{flushleft}
+%
+You may still use the symbols `\texttt{.}' `\texttt{,}' and `\texttt{-}' in other context in math mode.
+
+The first two conversions are switched on by default, the last conversion has
+to be switched on explicitly (this has been changed in v2.1):
+You may switch on/off the conversions with
+%
+\begin{flushleft}
+  \begin{tabular}{@{}ll@{}}
+    \cmd{\ZifferPunktAn}/\cmd{\ZifferPunktAus}   & (for the first two conversions) respectively \\
+    \cmd{\ZifferStrichAn}/\cmd{\ZifferStrichAus} & (for the last conversion).
+  \end{tabular}
+\end{flushleft}
+
+The reason why the last conversion is not on by default (and why it might be
+necessary to [temporarily] switch off a conversion) is that certain packages
+(in particular, newer versions of \pkg{amsmath}) cause problems with it.
+
+There were some discussions which should be the correct output of the
+above conversions (in particular, of `\texttt{-{}-}').
+If you do not like my choice: You may customize (i.\,e.\ redefine) the macros
+\cmd{\ZifferLeer} and \cmd{\ZifferStrich}
+after loading the package to produce the `one-thousand separator'
+respectively the `\ZifferStrich'.
+
+All above command-names are in German, because I had expected that this
+package is only needed for German texts. Meanwhile, I learned that also
+other countries use this strange convention for numbers. However, for
+downward compatibility, I decided to keep the name conventions anyway
+(after all, the name of the package is in German anyway).
+
+\end{document}
