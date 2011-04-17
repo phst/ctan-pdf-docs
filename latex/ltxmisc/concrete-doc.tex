@@ -1,0 +1,66 @@
+\documentclass[pagesize=auto, fontsize=12pt, DIV=10]{scrartcl}
+
+\usepackage{fixltx2e}
+\usepackage{etex}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{hologo}
+\usepackage{microtype}
+\usepackage{hyperref}
+
+\newcommand*{\mail}[1]{\href{mailto:#1}{\texttt{#1}}}
+\newcommand*{\pkg}[1]{\textsf{#1}}
+\newcommand*{\cs}[1]{\texttt{\textbackslash#1}}
+\makeatletter
+\newcommand*{\cmd}[1]{\cs{\expandafter\@gobble\string#1}}
+\makeatother
+
+\addtokomafont{title}{\rmfamily}
+
+\title{The \pkg{concrete} package\thanks{This manual corresponds to \pkg{concrete.sty}, dated~1996/10/08.}}
+\author{Jim Hefferon\thanks{\mail{jhefferon@smcvt.edu}}}
+\date{1996/10/08}
+
+
+\begin{document}
+
+\maketitle
+
+\noindent
+The \pkg{concrete} package provides fonts for an approximation of the style in \emph{Concrete Mathematics.}
+It simply loads the packages \pkg{beton} and \pkg{euler}; see the manuals of those two packages for details.
+
+
+\section{History}
+
+\begin{description}
+\item[96-10-08 Jim Hefferon \mail{jhefferon@smcvt.edu}] \leavevmode \\
+  It is an FAQ on \texttt{comp.text.tex} that people look on CTAN for a style 
+  with this name.  Seems reasonable.  They are always advised to 
+  \cmd{\usepackage} the two packages \pkg{beton} and \pkg{euler}.  So here is a wrapper style
+  to do that.
+\end{description}
+
+
+\section{Remarks}
+
+\begin{description}
+\item[96-10-08 jh] \leavevmode \\
+  There are other styles for Concrete Math (\pkg{concmath} and something
+  from \hologo{AmSLaTeX}\,1.1\ are the ones that I know of), but this one is
+  modular in that if the packages it calls are updated then of
+  course, this is updated also).  In particular, there are no font 
+  parameters, etc.
+\end{description}
+
+
+\section{Bugs}
+
+\begin{itemize}
+\item Unlike the \hologo{AmSLaTeX}\,v.\,1.1\ style file, this makes no attempt to
+  provide any grafitti, etc.\ macros.  Just the fonts.  (One could
+  argue that those are document-style, not font, macros.)
+\end{itemize}
+
+\end{document}
