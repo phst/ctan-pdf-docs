@@ -2,3 +2,4 @@ kurier
 linsys
 palatinox
 xunicode
+bibcheck
